@@ -1,11 +1,11 @@
 import { GlobalStyle } from './globalStyles'
-import ConnectFour from './Pages/ConnectFour'
+import ConnectFractions from './Pages/ConnectFractions'
 
 function App() {
   return (
     <>
       <GlobalStyle />
-      <ConnectFour />
+      <ConnectFractions />
     </>
   )
 }

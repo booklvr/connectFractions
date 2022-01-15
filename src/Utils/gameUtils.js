@@ -17,9 +17,11 @@ export const generateNewBoard = () => [
 ]
 
 // for real tho...all credit for this super optimized logic belongs here: Jeff Leu circa November 23, 2016
-const checkVertical = (board) => {
+const checkVertical = (board, pos) => {
   // Check only if row is 3 or greater
-  for (let r = 3; r < 6; r++) {
+  let total = 0
+
+  for (let r = 2; r < 6; r++) {
     for (let c = 0; c < 7; c++) {
       if (board[r][c]) {
         if (
@@ -34,7 +36,7 @@ const checkVertical = (board) => {
   }
 }
 
-const checkHorizontal = (board) => {
+const checkHorizontal = (board, pos) => {
   // Check only if column is 3 or less
   for (let r = 0; r < 6; r++) {
     for (let c = 0; c < 4; c++) {
@@ -51,7 +53,7 @@ const checkHorizontal = (board) => {
   }
 }
 
-const checkDiagonalRight = (board) => {
+const checkDiagonalRight = (board, pos) => {
   // Check only if row is 3 or greater AND column is 3 or less
   for (let r = 3; r < 6; r++) {
     for (let c = 0; c < 4; c++) {
@@ -68,7 +70,7 @@ const checkDiagonalRight = (board) => {
   }
 }
 
-const checkDiagonalLeft = (board) => {
+const checkDiagonalLeft = (board, pos) => {
   // Check only if row is 3 or greater AND column is 3 or greater
   for (let r = 3; r < 6; r++) {
     for (let c = 3; c < 7; c++) {
@@ -96,12 +98,29 @@ const checkDraw = (board) => {
   return 'draw'
 }
 
-export const checkForWin = (board) => {
+export const checkForWin = (board, pos) => {
   return (
-    checkVertical(board) ||
-    checkDiagonalRight(board) ||
-    checkDiagonalLeft(board) ||
-    checkHorizontal(board) ||
-    checkDraw(board)
+    checkVertical(board, pos) ||
+    checkDiagonalRight(board, pos) ||
+    checkDiagonalLeft(board, pos) ||
+    checkHorizontal(board, pos) ||
+    checkDraw(board, pos)
   )
+}
+
+export const createTiles = (color) => {
+  const initialArray = []
+  for (var i = 1; i <= 7; i++) {
+    for (var j = 1; j < i; j++) {
+      initialArray.push({
+        val: j / i,
+        num: j,
+        den: i,
+        hidden: false,
+        color,
+        id: `${color === 'red' ? 1 : 2}${j}${i}`,
+      })
+    }
+  }
+  return initialArray
 }
