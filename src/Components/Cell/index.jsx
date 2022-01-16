@@ -1,12 +1,12 @@
 import React from 'react'
 import { CellCircle, CellContainer } from './styled'
 
-const Cell = ({ value, columnIndex, play, setHoverColumn }) => {
+const Cell = ({ cell, columnIndex, play, setHoverColumn }) => {
   let color = 'whiteCircle'
 
-  if (value?.currentPlayer === 1) {
+  if (cell?.currentPlayer === 1) {
     color = 'redCircle'
-  } else if (value?.currentPlayer === 2) {
+  } else if (cell?.currentPlayer === 2) {
     color = 'yellowCircle'
   }
 
@@ -14,18 +14,24 @@ const Cell = ({ value, columnIndex, play, setHoverColumn }) => {
 
   // console.log('value', value)
 
-  if (value) {
+  if (cell.val) {
     innerCircle = (
       <React.Fragment>
-        <sub>{value.num}</sub>&frasl;
-        <sub>{value.den}</sub>
+        <sub>{cell.num}</sub>&frasl;
+        <sub>{cell.den}</sub>
+      </React.Fragment>
+    )
+  } else {
+    innerCircle = (
+      <React.Fragment>
+        [{cell.coordinate.x}, {cell.coordinate.y}]
       </React.Fragment>
     )
   }
 
   return (
     <CellContainer
-      onClick={() => play(columnIndex)}
+      onClick={() => play(cell.coordinate)}
       onMouseEnter={() => {
         setHoverColumn(columnIndex)
       }}

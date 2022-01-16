@@ -1,3 +1,5 @@
+import { add, fraction, number } from 'mathjs'
+
 export const deepCloneBoard = (board) => [
   [...board[0]],
   [...board[1]],
@@ -19,7 +21,7 @@ export const generateNewBoard = () => [
 // for real tho...all credit for this super optimized logic belongs here: Jeff Leu circa November 23, 2016
 const checkVertical = (board, pos) => {
   // Check only if row is 3 or greater
-  let total = 0
+  // let total = 0
 
   for (let r = 2; r < 6; r++) {
     for (let c = 0; c < 7; c++) {
@@ -123,4 +125,91 @@ export const createTiles = (color) => {
     }
   }
   return initialArray
+}
+
+export const createBoard = () => {
+  let initialArray = []
+
+  for (let i = 0; i < 6; i++) {
+    initialArray.push([])
+    for (var j = 0; j < 7; j++) {
+      initialArray[i].push({
+        val: null,
+        num: null,
+        den: null,
+        hidden: false,
+        color: null,
+        id: null,
+        coordinate: {
+          x: i,
+          y: j,
+        },
+      })
+    }
+  }
+
+  // for (var k = 0; k < 6; k++) {
+  //   for (var l = 0; l < 7; l++) {
+  //     console.log(initialArray[k][l])
+  //   }
+  // }
+
+  return initialArray
+}
+
+export const getCoordinate = ({ x, y }) => {
+  console.log('getCoordinate')
+  console.log(`col: [${x}, ${y}]`)
+}
+
+export const getCoordinateValue = ({ x, y }, board) => {
+  console.log('getCoordinateValue')
+  console.log(board[x][y])
+}
+
+export const getVertical = (matrix, board) => {
+  console.log('getVertical')
+  const verticalArr = []
+  for (var i = matrix.x; i < 6; i++) {
+    // console.log(`col: [${matrix.i}, ${matrix.y}]`)
+    console.log('x', i)
+    console.log('y', matrix.y)
+    verticalArr.push(board[i][matrix.y])
+    console.log('verticalArr', verticalArr)
+  }
+  getWholeNumbers(verticalArr)
+}
+
+export const getWholeNumbers = (arr) => {
+  // let total = arr.reduce(
+  //   (acc, curVal) => add(acc, fraction(`${curVal.num} / ${curVal.den}`)),
+  //   0
+  // )
+  // console.log('total', total)
+
+  let wholeNumber = fraction('0')
+
+  wholeNumber = add(wholeNumber, fraction('6/7'))
+  console.log(`wholeNumber`, wholeNumber)
+  wholeNumber = add(wholeNumber, fraction('6/7'))
+  console.log(`wholeNumber`, wholeNumber)
+  wholeNumber = add(wholeNumber, fraction('1/7'))
+  console.log(`wholeNumber`, wholeNumber)
+  wholeNumber = add(wholeNumber, fraction('1/7'))
+  console.log(`wholeNumber`, wholeNumber)
+  console.log(number(wholeNumber))
+
+  // arr.forEach((cell) => {
+  //   console.log('val', cell.val)
+  // })
+
+  // const total = arr.reduce((acc, curVal) => {
+  //   const temp = acc + curVal.val
+  //   if (temp % 1 === 0) {
+  //     wholeNumber += 1
+  //   }
+  //   return temp
+  // }, fraction('0'))
+  // console.log('total', total)
+  // console.log(`wholeNumber`, wholeNumber)
 }

@@ -8,7 +8,7 @@ const Row = ({ row, play, setHoverColumn }) => {
       {row.map((cell, i) => (
         <Cell
           key={i}
-          value={cell}
+          cell={cell}
           columnIndex={i}
           play={play}
           setHoverColumn={setHoverColumn}

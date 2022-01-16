@@ -8,9 +8,13 @@ import { TilesContainer } from '../../Components/Tiles/style'
 import TopRow from '../../Components/TopRow'
 import {
   checkForWin,
+  createBoard,
   createTiles,
   deepCloneBoard,
   generateNewBoard,
+  getCoordinate,
+  getCoordinateValue,
+  getVertical,
 } from '../../Utils/gameUtils'
 import {
   BoardAndTilesContainer,
@@ -99,11 +103,6 @@ const gameReducer = (state, action) => {
         ...state,
         stage: state.stage === 4 ? 1 : state.stage + 1,
       }
-    case 'decrement':
-      return {
-        ...state,
-        stage: state.stage === 1 ? 4 : state.stage--,
-      }
     case 'undoPreviousMove':
       return {
         ...state,
@@ -127,19 +126,22 @@ const gameReducer = (state, action) => {
 // 3) yellow chooses a fraction
 // 4) yellow places a fraction
 
+// createBoard()
+
 const initialGameState = {
   stage: 1,
   player1: 1,
   player2: 2,
   currentPlayer: 1,
-  board: [
-    [null, null, null, null, null, null, null],
-    [null, null, null, null, null, null, null],
-    [null, null, null, null, null, null, null],
-    [null, null, null, null, null, null, null],
-    [null, null, null, null, null, null, null],
-    [null, null, null, null, null, null, null],
-  ],
+  // board: [
+  //   [null, null, null, null, null, null, null],
+  //   [null, null, null, null, null, null, null],
+  //   [null, null, null, null, null, null, null],
+  //   [null, null, null, null, null, null, null],
+  //   [null, null, null, null, null, null, null],
+  //   [null, null, null, null, null, null, null],
+  // ],
+  board: createBoard(),
   redTiles: createTiles('red'),
   yellowTiles: createTiles('yellow'),
   gameOver: false,
@@ -155,20 +157,28 @@ const ConnectFractions = () => {
     initialGameState
   )
 
-  const play = (c) => {
+  const play = ({ x, y }) => {
     if (gameState.tileValue) {
+      console.log(`gameState.tileValue`, gameState.tileValue)
       if (!gameState.gameOver) {
         let board = deepCloneBoard(gameState.board)
+        let x = 5
         //check if cell is taken by starting at the bottom row and working up
-        for (let r = 5; r >= 0; r--) {
-          if (!board[r][c]) {
-            board[r][c] = {
+        for (; x >= 0; x--) {
+          if (!board[x][y].val) {
+            board[x][y] = {
+              ...board[x][y],
               ...gameState.tileValue,
               currentPlayer: gameState.currentPlayer,
             }
+            console.log('cell', board[x][y])
             break
           }
         }
+        getCoordinate({ x, y })
+        getCoordinateValue({ x, y }, board)
+        getVertical({ x, y }, board)
+
         addToPreviousTiles()
         // increment
         dispatchGameState({
@@ -181,43 +191,49 @@ const ConnectFractions = () => {
           message: null,
         })
 
+        const nextPlayer =
+          gameState.currentPlayer === gameState.player1
+            ? gameState.player2
+            : gameState.player1
+
+        dispatchGameState({
+          type: 'togglePlayer',
+          nextPlayer,
+          board,
+        })
+
         // Check status of board
-        let result = checkForWin(board)
-        if (result === gameState.player1) {
-          dispatchGameState({
-            type: 'endGame',
-            message: 'Player1 (red) wins!',
-            board,
-          })
-        } else if (result === gameState.player2) {
-          dispatchGameState({
-            type: 'endGame',
-            message: 'Player2 (yellow) wins!',
-            board,
-          })
-        } else if (result === 'draw') {
-          dispatchGameState({
-            type: 'endGame',
-            message: 'Draw Game!',
-            board,
-          })
-        } else {
-          const nextPlayer =
-            gameState.currentPlayer === gameState.player1
-              ? gameState.player2
-              : gameState.player1
+        // let result = checkForWin(board)
+        // if (result === gameState.player1) {
+        //   dispatchGameState({
+        //     type: 'endGame',
+        //     message: 'Player1 (red) wins!',
+        //     board,
+        //   })
+        // } else if (result === gameState.player2) {
+        //   dispatchGameState({
+        //     type: 'endGame',
+        //     message: 'Player2 (yellow) wins!',
+        //     board,
+        //   })
+        // } else if (result === 'draw') {
+        //   dispatchGameState({
+        //     type: 'endGame',
+        //     message: 'Draw Game!',
+        //     board,
+        //   })
+        // } else {
+        //   const nextPlayer =
+        //     gameState.currentPlayer === gameState.player1
+        //       ? gameState.player2
+        //       : gameState.player1
 
-          // let message =
-          //   nextPlayer === 1
-          //     ? 'Red: Choose a fraction.'
-          //     : 'Yellow: Choose a fraction'
-
-          dispatchGameState({
-            type: 'togglePlayer',
-            nextPlayer,
-            board,
-          })
-        }
+        // dispatchGameState({
+        //   type: 'togglePlayer',
+        //   nextPlayer,
+        //   board,
+        // })
+        // }
       }
       // it's gameover and a user clicked a cell
       else {
@@ -346,7 +362,16 @@ const ConnectFractions = () => {
     for (let i = 5; i >= 0; i--) {
       const foundIndex = board[i].findIndex((col) => col?.id === lastTile.id)
       if (foundIndex >= 0) {
-        board[i][foundIndex] = null
+        const coordinate = board[i][foundIndex].coordinate
+        board[i][foundIndex] = {
+          val: null,
+          num: null,
+          den: null,
+          hidden: false,
+          color: null,
+          id: null,
+          coordinate,
+        }
         dispatchGameState({
           type: 'updateBoard',
           board,
