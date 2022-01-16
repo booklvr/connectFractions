@@ -1,9 +1,7 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import {
   TopRowCellContainer,
   TopRowCircle,
-  tileValue,
-  hoverColumn,
 } from './styled'
 
 const TopRowCell = ({

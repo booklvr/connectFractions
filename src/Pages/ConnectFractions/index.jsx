@@ -1,13 +1,10 @@
 import React, { useReducer } from 'react'
 import Message from '../../Components/Message'
 import PreviousTiles from '../../Components/PreviousTiles'
-import { PreviousTile } from '../../Components/PreviousTiles/style'
 import Row from '../../Components/Row'
 import Tiles from '../../Components/Tiles'
-import { TilesContainer } from '../../Components/Tiles/style'
 import TopRow from '../../Components/TopRow'
 import {
-  checkForWin,
   createBoard,
   createTiles,
   deepCloneBoard,
