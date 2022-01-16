@@ -1,4 +1,4 @@
-import { add, fraction, number } from 'mathjs'
+// import { add, fraction, number } from 'mathjs'
 
 export const deepCloneBoard = (board) => [
   [...board[0]],
@@ -186,23 +186,19 @@ export const getWholeNumbers = (arr) => {
   //   0
   // )
   // console.log('total', total)
-
-  let wholeNumber = fraction('0')
-
-  wholeNumber = add(wholeNumber, fraction('6/7'))
-  console.log(`wholeNumber`, wholeNumber)
-  wholeNumber = add(wholeNumber, fraction('6/7'))
-  console.log(`wholeNumber`, wholeNumber)
-  wholeNumber = add(wholeNumber, fraction('1/7'))
-  console.log(`wholeNumber`, wholeNumber)
-  wholeNumber = add(wholeNumber, fraction('1/7'))
-  console.log(`wholeNumber`, wholeNumber)
-  console.log(number(wholeNumber))
-
+  // let wholeNumber = fraction('0')
+  // wholeNumber = add(wholeNumber, fraction('6/7'))
+  // console.log(`wholeNumber`, wholeNumber)
+  // wholeNumber = add(wholeNumber, fraction('6/7'))
+  // console.log(`wholeNumber`, wholeNumber)
+  // wholeNumber = add(wholeNumber, fraction('1/7'))
+  // console.log(`wholeNumber`, wholeNumber)
+  // wholeNumber = add(wholeNumber, fraction('1/7'))
+  // console.log(`wholeNumber`, wholeNumber)
+  // console.log(number(wholeNumber))
   // arr.forEach((cell) => {
   //   console.log('val', cell.val)
   // })
-
   // const total = arr.reduce((acc, curVal) => {
   //   const temp = acc + curVal.val
   //   if (temp % 1 === 0) {
