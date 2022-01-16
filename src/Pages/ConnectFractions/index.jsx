@@ -174,7 +174,8 @@ const ConnectFractions = () => {
         }
         getCoordinate({ x, y })
         getCoordinateValue({ x, y }, board)
-        getVertical({ x, y }, board)
+        let isWinningVertical = getVertical({ x, y }, board)
+        console.log(`isWinningVertical`, isWinningVertical)
 
         addToPreviousTiles()
         // increment

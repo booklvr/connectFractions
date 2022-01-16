@@ -12,7 +12,7 @@ const Message = ({ message, gameStage }) => {
       stage = 'Red: Place your tile.'
       break
     case 3:
-      stage = 'Yellow: Place your fraction.'
+      stage = 'Yellow: Choose your fraction.'
       break
     case 4:
       stage = 'Yellow: Place your tile.'

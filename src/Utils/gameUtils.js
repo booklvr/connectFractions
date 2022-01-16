@@ -1,4 +1,4 @@
-// import { add, fraction, number } from 'mathjs'
+import { add, fraction, number } from 'mathjs'
 
 export const deepCloneBoard = (board) => [
   [...board[0]],
@@ -177,7 +177,8 @@ export const getVertical = (matrix, board) => {
     verticalArr.push(board[i][matrix.y])
     console.log('verticalArr', verticalArr)
   }
-  getWholeNumbers(verticalArr)
+  let isWinningArray = getWholeNumbers(verticalArr)
+  return isWinningArray
 }
 
 export const getWholeNumbers = (arr) => {
@@ -185,9 +186,67 @@ export const getWholeNumbers = (arr) => {
   //   (acc, curVal) => add(acc, fraction(`${curVal.num} / ${curVal.den}`)),
   //   0
   // )
+
+  let wholeNumber = 0
+
+  let lastWinningCellIndex
+
+  const reduceFraction = (acc, curVal, i) => {
+    console.log('acc', number(acc))
+    const sum = add(acc, fraction(`${curVal.num}/${curVal.den}`))
+    if (sum % 1 === 0) {
+      console.log(curVal)
+      // alert('we have a whole number', curVal)
+      wholeNumber += 1
+      lastWinningCellIndex = i
+    }
+    return sum
+    // return add(acc, fraction(`${curVal.num}/${curVal.den}`))
+  }
+
+  let total = arr.reduce(reduceFraction, fraction('0'))
+
+  console.log('total', total)
+  console.log('wholeNumber', wholeNumber)
+  console.log(`lastWinningCellIndex`, lastWinningCellIndex)
+
+  //get the winning cells
+  let i = lastWinningCellIndex
+  let winningArray = []
+  if (i >= 2) {
+    while (i >= 0) {
+      console.log(arr[i])
+      winningArray.push(arr[i])
+      i--
+    }
+    return {
+      points: wholeNumber,
+      winningArray,
+    }
+  } else {
+    return null
+  }
+
+  // i need to update the
+  // identify winning cells
+
+  // let total = arr.reduce(
+  //   (acc, curVal) => add(acc, fraction(`${curVal.num}/${curVal.den}`)),
+  //   fraction('0')
+  // )
+
+  // let total = add(fraction('3/1'), fraction('-5/1'))
+
+  // console.log(`total`, total)
+  // console.log(`total.d`, total.d)
+  // let num = number(total)
+  // console.log(`num`, num)
+
+  // console.log(1 % 2)
+
   // console.log('total', total)
   // let wholeNumber = fraction('0')
-  // wholeNumber = add(wholeNumber, fraction('6/7'))
+  // wholeNumber = add(wholeNumber, fraction(`${6}/${7}`))
   // console.log(`wholeNumber`, wholeNumber)
   // wholeNumber = add(wholeNumber, fraction('6/7'))
   // console.log(`wholeNumber`, wholeNumber)
