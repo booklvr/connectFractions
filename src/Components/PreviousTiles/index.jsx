@@ -1,8 +1,12 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { GameContext } from '../../Pages/ConnectFractions'
 import { PreviousTilesContainer } from '../../Pages/ConnectFractions/styled'
 import { PreviousTile } from './style'
 
-const PreviousTiles = ({ previousTiles }) => {
+const PreviousTiles = () => {
+  const {
+    gameState: { previousTiles },
+  } = useContext(GameContext)
   return (
     <PreviousTilesContainer>
       {previousTiles.length > 0 &&

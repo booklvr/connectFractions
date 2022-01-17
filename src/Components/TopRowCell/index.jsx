@@ -1,19 +1,22 @@
-import React from 'react'
-import {
-  TopRowCellContainer,
-  TopRowCircle,
-} from './styled'
+import React, { useContext, useEffect, useState } from 'react'
+import { GameContext, HoverContext } from '../../Pages/ConnectFractions'
+import { TopRowCellContainer, TopRowCircle } from './styled'
 
-const TopRowCell = ({
-  currentPlayer,
-  column,
-  play,
-  tileValue,
-  show,
-  hoverColumn,
-  setHoverColumn,
-}) => {
- 
+const TopRowCell = ({ column, play }) => {
+  const { hoverColumn, setHoverColumn } = useContext(HoverContext)
+
+  // currentPlayer, tileValue
+  const {
+    gameState: { currentPlayer, tileValue },
+  } = useContext(GameContext)
+
+  // const [show, setShow] = useState(false)
+
+  // useEffect(() => {
+  //   if (hoverColumn === column) {
+  //     setShow(true)
+  //   } else setShow(false)
+  // }, [hoverColumn, column])
 
   return (
     <TopRowCellContainer
@@ -29,10 +32,10 @@ const TopRowCell = ({
         hoverColumn={hoverColumn}
         column={column}
         onClick={() => play(column)}
-        show={show}
+        show={hoverColumn === column}
         tileValue={tileValue}
       >
-        {show && tileValue && (
+        {tileValue && (
           <>
             <sub>{tileValue.num}</sub>&frasl;
             <sub>{tileValue.den}</sub>

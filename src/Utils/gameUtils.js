@@ -141,8 +141,8 @@ export const createBoard = () => {
         color: null,
         id: null,
         coordinate: {
-          x: i,
-          y: j,
+          x: j,
+          y: i,
         },
       })
     }
@@ -204,9 +204,9 @@ export const getWholeNumbers = (arr) => {
     // return add(acc, fraction(`${curVal.num}/${curVal.den}`))
   }
 
-  let total = arr.reduce(reduceFraction, fraction('0'))
+  arr.reduce(reduceFraction, fraction('0'))
 
-  console.log('total', total)
+  // console.log('total', total)
   console.log('wholeNumber', wholeNumber)
   console.log(`lastWinningCellIndex`, lastWinningCellIndex)
 
@@ -226,45 +226,19 @@ export const getWholeNumbers = (arr) => {
   } else {
     return null
   }
+}
 
-  // i need to update the
-  // identify winning cells
+export const getHorizontalArray = (matrix, board) => {
+  console.log('matrix', matrix)
 
-  // let total = arr.reduce(
-  //   (acc, curVal) => add(acc, fraction(`${curVal.num}/${curVal.den}`)),
-  //   fraction('0')
-  // )
+  let horiztontalArray = []
 
-  // let total = add(fraction('3/1'), fraction('-5/1'))
+  let yPos = matrix.x
 
-  // console.log(`total`, total)
-  // console.log(`total.d`, total.d)
-  // let num = number(total)
-  // console.log(`num`, num)
-
-  // console.log(1 % 2)
-
-  // console.log('total', total)
-  // let wholeNumber = fraction('0')
-  // wholeNumber = add(wholeNumber, fraction(`${6}/${7}`))
-  // console.log(`wholeNumber`, wholeNumber)
-  // wholeNumber = add(wholeNumber, fraction('6/7'))
-  // console.log(`wholeNumber`, wholeNumber)
-  // wholeNumber = add(wholeNumber, fraction('1/7'))
-  // console.log(`wholeNumber`, wholeNumber)
-  // wholeNumber = add(wholeNumber, fraction('1/7'))
-  // console.log(`wholeNumber`, wholeNumber)
-  // console.log(number(wholeNumber))
-  // arr.forEach((cell) => {
-  //   console.log('val', cell.val)
-  // })
-  // const total = arr.reduce((acc, curVal) => {
-  //   const temp = acc + curVal.val
-  //   if (temp % 1 === 0) {
-  //     wholeNumber += 1
-  //   }
-  //   return temp
-  // }, fraction('0'))
-  // console.log('total', total)
-  // console.log(`wholeNumber`, wholeNumber)
+  console.log(`yPos`, yPos)
+  // if (matrix.y !== 0) {
+  //   let y = matrix.y - 1;
+  //   // while (y !== 0 && board) {}
+  // }
+  // while (matrix.y)
 }

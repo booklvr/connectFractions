@@ -1,7 +1,10 @@
-import React from 'react'
+import React, { useContext, Fragment } from 'react'
+import { HoverContext } from '../../Pages/ConnectFractions'
 import { CellCircle, CellContainer } from './styled'
 
-const Cell = ({ cell, columnIndex, play, setHoverColumn }) => {
+const Cell = ({ cell, columnIndex, play }) => {
+  const { setHoverColumn } = useContext(HoverContext)
+
   let color = 'whiteCircle'
 
   if (cell?.currentPlayer === 1) {
@@ -16,10 +19,10 @@ const Cell = ({ cell, columnIndex, play, setHoverColumn }) => {
 
   if (cell.val) {
     innerCircle = (
-      <React.Fragment>
+      <Fragment>
         <sub>{cell.num}</sub>&frasl;
         <sub>{cell.den}</sub>
-      </React.Fragment>
+      </Fragment>
     )
   } else {
     innerCircle = (

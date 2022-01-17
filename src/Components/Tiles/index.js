@@ -1,31 +1,60 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { GameContext } from '../../Pages/ConnectFractions'
 import { Tile, TilesContainer } from './style'
 
-const Tiles = ({ color, tiles, chooseTile, disabled, gameStage }) => {
-  // const handleClick = (tile) => {
-  //   console.log('tile', tile)
+const Tiles = ({ color, tiles, disabled, gameStage, replaceTile }) => {
+  const { gameState, dispatchGameState } = useContext(GameContext)
 
-  //   // set the tile for the game board
-  //   setTileValue(tile)
-  //   addToPreviousTiles(tile)
+  const hideTile = (tile) => {
+    //check the team type
+    // change visibility to hidden for that teams tile
+    if (tile.color === 'red') {
+      const redTiles = [...gameState.redTiles]
+      const foundIndex = redTiles.findIndex((x) => x.id === tile.id)
+      redTiles[foundIndex].hidden = !redTiles[foundIndex].hidden
+      dispatchGameState({
+        type: 'updateRedTiles',
+        redTiles,
+      })
+    } else {
+      const yellowTiles = [...gameState.yellowTiles]
+      const foundIndex = yellowTiles.findIndex((x) => x.id === tile.id)
+      yellowTiles[foundIndex].hidden = !yellowTiles[foundIndex].hidden
+      dispatchGameState({
+        type: 'updateYellowTiles',
+        yellowTiles,
+      })
+    }
+  }
 
-  //   // create a copy of the tileFractions array
-  //   // let newArr = [...tiles]
-
-  //   // find the index of the clicked tile
-  //   // const foundIndex = newArr.findIndex((x) => x.id === tile.id)
-
-  //   // update the show property on that tile
-  //   // newArr[foundIndex].hidden = !newArr[foundIndex].hidden
-
-  //   // console.log('tiles:', tiles)
-
-  //   //copy the updated array into the tileFractions State
-  //   // setTileFractions(newArr)
-
-  //   // const foundIndex = tileFractions.findIndex((x) => x.id === tile.id)
-  //   // tileFractions[foundIndex] = { ...tileFractions[foundIndex], show: false }
-  // }
+  const chooseTile = (tile) => {
+    // check if stage 1 or 2 or 3 or 4
+    switch (gameState.stage) {
+      case 1:
+      case 3:
+        dispatchGameState({
+          type: 'updateTileValue',
+          tileValue: tile,
+        })
+        dispatchGameState({
+          type: 'increment',
+        })
+        hideTile(tile)
+        break
+      case 2:
+      case 4:
+        // add the current tile back to the array
+        replaceTile(gameState.tileValue)
+        dispatchGameState({
+          type: 'updateTileValue',
+          tileValue: tile,
+        })
+        hideTile(tile)
+        break
+      default:
+        break
+    }
+  }
 
   return (
     <TilesContainer color={color} disabled={disabled}>

@@ -2,7 +2,7 @@ import React from 'react'
 import Cell from '../Cell'
 import { RowContainer } from './styled'
 
-const Row = ({ row, play, setHoverColumn }) => {
+const Row = ({ row, play }) => {
   return (
     <RowContainer>
       {row.map((cell, i) => (
@@ -11,7 +11,6 @@ const Row = ({ row, play, setHoverColumn }) => {
           cell={cell}
           columnIndex={i}
           play={play}
-          setHoverColumn={setHoverColumn}
         />
       ))}
     </RowContainer>
