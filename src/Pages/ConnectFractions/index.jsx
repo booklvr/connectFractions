@@ -36,29 +36,34 @@ const ConnectFractions = () => {
   const [hoverColumn, setHoverColumn] = useState(null)
 
   const play = ({ x, y }) => {
-    console.log(`x`, x)
-    console.log(`y`, y)
     if (gameState.tileValue) {
-      console.log(`gameState.tileValue`, gameState.tileValue)
+      // console.log(`gameState.tileValue`, gameState.tileValue)
       if (!gameState.gameOver) {
         let board = deepCloneBoard(gameState.board)
-        let row = 0
-        console.log('row', row)
+
         //check if cell is taken by starting at the bottom row and working up
-        for (; row <= 5; row++) {
-          console.log(`'object'`, 'object')
-          console.log(`board[x]`, board[x])
-          if (!board[x][row].val) {
-            console.log(`board[x][row]`, board[x][row])
-            board[x][row] = {
-              ...board[x][row],
-              ...gameState.tileValue,
-              currentPlayer: gameState.currentPlayer,
-            }
-            // console.log('cell', board[x][y])
-            break
-          }
-        }
+
+        console.log(`x`, x)
+        console.log(`y`, y)
+        let row = y
+        let col = x
+
+        console.log(`row`, row)
+        console.log(`col`, col)
+        console.log(`board.length`, board.length)
+
+        //check if cell is taken by starting at the bottom row and working up
+        // for (; y >= 0; y--) {
+        //   if (!board[x][y].val) {
+        //     board[x][y] = {
+        //       ...board[x][y],
+        //       ...gameState.tileValue,
+        //       currentPlayer: gameState.currentPlayer,
+        //     }
+        //     console.log('cell', board[x][y])
+        //     break
+        //   }
+        // }
         // getCoordinate({ x, y })
         // getCoordinateValue({ x, y }, board)
 
