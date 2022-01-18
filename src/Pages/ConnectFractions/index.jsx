@@ -35,43 +35,37 @@ const ConnectFractions = () => {
 
   const [hoverColumn, setHoverColumn] = useState(null)
 
-  const play = ({ x, y }) => {
+  const play = (c) => {
     if (gameState.tileValue) {
       // console.log(`gameState.tileValue`, gameState.tileValue)
       if (!gameState.gameOver) {
         let board = deepCloneBoard(gameState.board)
-
+        let r = board.length - 1
         //check if cell is taken by starting at the bottom row and working up
-
-        console.log(`x`, x)
-        console.log(`y`, y)
-        let row = y
-        let col = x
-
-        console.log(`row`, row)
-        console.log(`col`, col)
-        console.log(`board.length`, board.length)
-
-        //check if cell is taken by starting at the bottom row and working up
-        // for (; y >= 0; y--) {
-        //   if (!board[x][y].val) {
-        //     board[x][y] = {
-        //       ...board[x][y],
-        //       ...gameState.tileValue,
-        //       currentPlayer: gameState.currentPlayer,
-        //     }
-        //     console.log('cell', board[x][y])
-        //     break
-        //   }
-        // }
-        // getCoordinate({ x, y })
+        for (; r >= 0; r--) {
+          if (!board[r][c].val) {
+            board[r][c] = {
+              ...board[r][c],
+              ...gameState.tileValue,
+              currentPlayer: gameState.currentPlayer,
+            }
+            console.log('cell', board[r][c])
+            break
+          }
+        }
+        // getCoordinate({ r, c })
         // getCoordinateValue({ x, y }, board)
 
         // check Vertical
-        // let isWinningVertical = getVertical({ x, y }, board)
-        // console.log(`isWinningVertical`, isWinningVertical)
-        // let isWinningHorizontal = getHorizontalArray({ x, y }, board)
-        // console.log(`isWinningHorizontal`, isWinningHorizontal)
+        let isWinningVertical = getVertical({ r, c }, board)
+        console.log(`isWinningVertical`, isWinningVertical)
+        let winningHorizontalArrays = getHorizontalArray({ r, c }, board)
+
+        if (winningHorizontalArrays?.length > 0) {
+          winningHorizontalArrays.forEach((winningArray, i) => {
+            console.log(`winning horizontal array ${i}:`, winningArray)
+          })
+        }
 
         addToPreviousTiles()
         // increment

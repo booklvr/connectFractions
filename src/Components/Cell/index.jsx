@@ -27,14 +27,14 @@ const Cell = ({ cell, columnIndex, play }) => {
   } else {
     innerCircle = (
       <React.Fragment>
-        [{cell.coordinate.x}, {cell.coordinate.y}]
+        [{cell.coordinate.r}, {cell.coordinate.c}]
       </React.Fragment>
     )
   }
 
   return (
     <CellContainer
-      onClick={() => play(cell.coordinate)}
+      onClick={() => play(cell.coordinate.c)}
       onMouseEnter={() => {
         setHoverColumn(columnIndex)
       }}
