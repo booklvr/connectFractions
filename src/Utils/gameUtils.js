@@ -221,7 +221,7 @@ export const getWholeNumbers = (arr) => {
     }
     return {
       points: wholeNumber,
-      winningArray,
+      arr: winningArray,
     }
   } else {
     return null
@@ -312,7 +312,7 @@ const checkHorizontalArray = (arr, board, c) => {
   let l = length
   let n = 0
 
-  let points = 0
+  // let points = 0
   // let wholeNumber = 0
   let winningArrays = []
 
@@ -341,16 +341,63 @@ const checkHorizontalArray = (arr, board, c) => {
       // see if there is a whole number in the slices array
       let result = getWholeNumberFromHorizontalArray(slicedArray)
 
-      if (result > points) {
-        points = result
-        winningArrays.push([...slicedArray])
+      if (result) {
+        winningArrays.push({
+          points: result,
+          arr: [...slicedArray],
+        })
       }
     }
     l--
     n++
   }
   if (winningArrays.length > 0) {
-    console.log(`winningArray`, winningArrays)
     return winningArrays
   }
+}
+
+export const combineWinningArrays = (
+  vertical,
+  horizontal,
+  diagonalDown,
+  diagonalUp
+) => {
+  let winningArrays = []
+  let i = 1
+  let points = 0
+  if (vertical) {
+    console.log(`(${i++}). vertical:`, vertical)
+    points += vertical.points
+    winningArrays.push(vertical.arr)
+  }
+
+  if (horizontal?.length) {
+    horizontal.forEach((arr) => console.log(`(${i++}). horizontal:`, arr))
+    console.log('winning in horizontal')
+    console.log(`winningArrays`, winningArrays)
+
+    horizontal.forEach((arr) => {
+      points += arr.points
+      winningArrays.push(arr.arr)
+    })
+  }
+
+  console.log(`points`, points)
+  console.log(`winningArrays`, winningArrays)
+
+  return {
+    points,
+    winningArrays,
+  }
+
+  // continue with diagional down and diagonal up later
+  // if (diagonalDown?.length) {
+  //   diagonalDown.forEach((arr) => console.log(`(${i++}). diagonalDown:`, arr))
+  //   winningArrays = winningArrays.concat(diagonalDown)
+  // }
+  // if (diagonalUp?.length) {
+  //   diagonalUp.forEach((arr) => console.log(`(${i++}). horizontal:`, arr))
+  //   winningArrays = winningArrays.concat(diagonalUp)
+  // }
+  // return winningArrays
 }

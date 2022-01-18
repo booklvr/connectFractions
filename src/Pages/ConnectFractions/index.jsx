@@ -6,8 +6,11 @@ import Row from '../../Components/Row'
 import Tiles from '../../Components/Tiles'
 import TopRow from '../../Components/TopRow'
 import UndoButton from '../../Components/UndoButton'
+import PointData from '../../PointData'
+import { WinningArrays } from '../../PointData/style'
 import { gameReducer, initialGameState } from '../../reducers/gameReducer'
 import {
+  combineWinningArrays,
   deepCloneBoard,
   generateNewBoard,
   getCoordinate,
@@ -57,15 +60,53 @@ const ConnectFractions = () => {
         // getCoordinateValue({ x, y }, board)
 
         // check Vertical
-        let isWinningVertical = getVertical({ r, c }, board)
-        console.log(`isWinningVertical`, isWinningVertical)
-        let winningHorizontalArrays = getHorizontalArray({ r, c }, board)
+        let verticalWinningArray = getVertical({ r, c }, board)
+        console.log(`verticalWinningArrays`, verticalWinningArray)
+        let horizontalWinningArrays = getHorizontalArray({ r, c }, board)
 
-        if (winningHorizontalArrays?.length > 0) {
-          winningHorizontalArrays.forEach((winningArray, i) => {
-            console.log(`winning horizontal array ${i}:`, winningArray)
-          })
+        // if (horizontalWinningArrays?.length > 0) {
+        //   horizontalWinningArrays.forEach((winningArray, i) => {
+        //     console.log(`winning horizontal array ${i}:`, winningArray)
+        //   })
+        // }
+
+        let winningData = combineWinningArrays(
+          verticalWinningArray,
+          horizontalWinningArrays
+        )
+        console.log('winningData', winningData)
+
+        if (winningData.winningArrays?.length) {
+          if (gameState.currentPlayer === 1) {
+            console.log('red will get these points')
+            // copy game state red winnings
+            let redWinnings = gameState.redWinnings
+            redWinnings.points += winningData.points
+            redWinnings.winningArrays = [
+              ...redWinnings.winningArrays,
+              ...winningData.winningArrays,
+            ]
+            redWinnings.winningArrays.concat(winningData.winningArrays)
+
+            dispatchGameState({
+              type: 'updateRedWinnings',
+              redWinnings,
+            })
+          } else {
+            console.log('yellow will get these points')
+            let yellowWinnings = gameState.yellowWinnings
+            yellowWinnings.points += winningData.points
+            yellowWinnings.winningArrays.concat(winningData.winningArrays)
+
+            dispatchGameState({
+              type: 'updateYellowWinnings',
+              yellowWinnings,
+            })
+          }
+        } else {
+          console.log('fuck fuck fuck')
         }
+        // connect arrays
 
         addToPreviousTiles()
         // increment
@@ -196,6 +237,7 @@ const ConnectFractions = () => {
           <PreviousTiles previousTiles={gameState.previousTiles} />
 
           <BoardAndTilesContainer>
+            <PointData data={gameState.redWinnings} />
             <Tiles
               color='red'
               tiles={[...gameState.redTiles]}
@@ -223,6 +265,7 @@ const ConnectFractions = () => {
               disabled={gameState.currentPlayer === 1}
               replaceTile={replaceTile}
             />
+            <PointData data={gameState.yellowWinnings} />
           </BoardAndTilesContainer>
 
           <Message gameStage={gameState.stage} message={gameState.message} />

@@ -15,6 +15,14 @@ export const initialGameState = {
   // ],
   board: createBoard(),
   redTiles: createTiles('red'),
+  redWinnings: {
+    points: 0,
+    winningArrays: [],
+  },
+  yellowWinnings: {
+    points: 0,
+    winningArrays: [],
+  },
   yellowTiles: createTiles('yellow'),
   gameOver: false,
   message: 'Red: Choose a fraction.',
@@ -105,6 +113,16 @@ export const gameReducer = (state, action) => {
         tileValue: null,
         stage: action.stage,
         currentPlayer: state.currentPlayer === 1 ? 2 : 1,
+      }
+    case 'updateRedWinnings':
+      return {
+        ...state,
+        redWinnings: action.redWinnings,
+      }
+    case 'updateYellowWinnings':
+      return {
+        ...state,
+        yellowWinnings: action.redWinnings,
       }
     // case 10
 
