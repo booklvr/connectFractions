@@ -15,7 +15,6 @@ const Cell = ({ cell, columnIndex, play }) => {
 
   let innerCircle = ''
 
-  // console.log('value', value)
 
   if (cell.val) {
     innerCircle = (

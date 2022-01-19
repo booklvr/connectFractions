@@ -8,7 +8,7 @@ export const TilesContainer = styled.div`
   height: calc(var(--cellWidth) * 6);
   /* background-color: ${({ color }) =>
     color === 'red' ? 'red' : 'yellow'}; */
-  width: 300px;
+  width: 320px;
 
   border: 10px solid ${({ color }) => (color === 'red' ? 'red' : 'yellow')};
 `

@@ -2,6 +2,7 @@ import styled from 'styled-components/macro'
 
 export const PointDataContainer = styled.div`
   display: flex;
+  padding: 0 1rem;
   width: 15rem;
   border: 1px solid #000;
   height: calc(var(--cellWidth) * 6);
@@ -13,10 +14,3 @@ export const PointDataContainer = styled.div`
 export const PointsHeading = styled.h1``
 
 export const Points = styled.p``
-
-export const WinningArrays = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-`

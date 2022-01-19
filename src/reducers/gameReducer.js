@@ -16,10 +16,12 @@ export const initialGameState = {
   board: createBoard(),
   redTiles: createTiles('red'),
   redWinnings: {
+    team: 'red',
     points: 0,
     winningArrays: [],
   },
   yellowWinnings: {
+    team: 'yellow',
     points: 0,
     winningArrays: [],
   },
@@ -122,7 +124,7 @@ export const gameReducer = (state, action) => {
     case 'updateYellowWinnings':
       return {
         ...state,
-        yellowWinnings: action.redWinnings,
+        yellowWinnings: action.yellowWinnings,
       }
     // case 10
 
