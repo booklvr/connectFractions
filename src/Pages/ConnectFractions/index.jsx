@@ -6,8 +6,8 @@ import Row from '../../Components/Row'
 import Tiles from '../../Components/Tiles'
 import TopRow from '../../Components/TopRow'
 import UndoButton from '../../Components/UndoButton'
-import PointData from '../../PointData'
-import { WinningArrays } from '../../PointData/style'
+import PointData from '../../Components/PointData'
+// import { WinningArrays } from '../../PointData/style'
 import { gameReducer, initialGameState } from '../../reducers/gameReducer'
 import {
   combineWinningArrays,
