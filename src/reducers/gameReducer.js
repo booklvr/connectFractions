@@ -5,14 +5,6 @@ export const initialGameState = {
   player1: 1,
   player2: 2,
   currentPlayer: 1,
-  // board: [
-  //   [null, null, null, null, null, null, null],
-  //   [null, null, null, null, null, null, null],
-  //   [null, null, null, null, null, null, null],
-  //   [null, null, null, null, null, null, null],
-  //   [null, null, null, null, null, null, null],
-  //   [null, null, null, null, null, null, null],
-  // ],
   board: createBoard(),
   redTiles: createTiles('red'),
   redWinnings: {
@@ -28,7 +20,6 @@ export const initialGameState = {
   yellowTiles: createTiles('yellow'),
   gameOver: false,
   message: 'Red: Choose a fraction.',
-  // hoverColumn: null,
   tileValue: null,
   previousTiles: [],
 }
@@ -40,7 +31,6 @@ export const gameReducer = (state, action) => {
     case 'newGame':
       return {
         ...initialGameState,
-        board: action.board,
       }
     //3
     case 'togglePlayer':
@@ -125,6 +115,11 @@ export const gameReducer = (state, action) => {
       return {
         ...state,
         yellowWinnings: action.yellowWinnings,
+      }
+    case 'updateWinningCell':
+      return {
+        ...state,
+        board: action.board,
       }
     // case 10
 

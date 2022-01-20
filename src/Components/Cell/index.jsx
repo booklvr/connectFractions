@@ -5,16 +5,19 @@ import { CellCircle, CellContainer } from './styled'
 const Cell = ({ cell, columnIndex, play }) => {
   const { setHoverColumn } = useContext(HoverContext)
 
-  let color = 'whiteCircle'
+  let color = 'white'
 
   if (cell?.currentPlayer === 1) {
-    color = 'redCircle'
+    color = 'red'
   } else if (cell?.currentPlayer === 2) {
-    color = 'yellowCircle'
+    color = 'yellow'
   }
 
-  let innerCircle = ''
+  // if (cell.winner) {
+  //   color = 'purple'
+  // }
 
+  let innerCircle = ''
 
   if (cell.val) {
     innerCircle = (
@@ -23,13 +26,14 @@ const Cell = ({ cell, columnIndex, play }) => {
         <sub>{cell.den}</sub>
       </Fragment>
     )
-  } else {
-    innerCircle = (
-      <React.Fragment>
-        [{cell.coordinate.r}, {cell.coordinate.c}]
-      </React.Fragment>
-    )
   }
+  // else {
+  //   innerCircle = (
+  //     <React.Fragment>
+  //       [{cell.coordinate.r}, {cell.coordinate.c}]
+  //     </React.Fragment>
+  //   )
+  // }
 
   return (
     <CellContainer

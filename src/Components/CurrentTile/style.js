@@ -3,7 +3,7 @@ import styled from 'styled-components/macro'
 export const CurrentTileContainer = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
 `
 export const TileText = styled.p`

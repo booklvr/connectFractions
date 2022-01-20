@@ -10,6 +10,7 @@ import PointData from '../../Components/PointData'
 // import { WinningArrays } from '../../PointData/style'
 import { gameReducer, initialGameState } from '../../reducers/gameReducer'
 import {
+  createBoard,
   // combineWinningArrays,
   deepCloneBoard,
   generateNewBoard,
@@ -20,6 +21,7 @@ import {
   // getHorizontalArray,
   // getVertical,
   getWinningArrays,
+  showWinningTilesOnBoard,
 } from '../../Utils/gameUtils'
 import {
   BoardAndTilesContainer,
@@ -27,6 +29,8 @@ import {
   MatrixContainer,
   NewGameButton,
   PageContainer,
+  PointsAndTilesContainer,
+  Title,
 } from './styled'
 
 // context
@@ -61,9 +65,7 @@ const ConnectFractions = () => {
         // check for winning arrays
         let winningArrays = getWinningArrays({ r, c }, board)
         console.log(`winningArrays`, winningArrays)
-        console.log('FUCK 1')
         if (winningArrays.winningArrays.length) {
-          console.log('FUCK 2')
           if (gameState.currentPlayer === 1) {
             console.log('red will get these points')
             // copy game state red winnings
@@ -73,8 +75,6 @@ const ConnectFractions = () => {
               ...winningArrays.winningArrays,
               ...redWinnings.winningArrays,
             ]
-            // redWinnings.winningArrays.concat(winningData.winningArrays)
-
             dispatchGameState({
               type: 'updateRedWinnings',
               redWinnings,
@@ -92,9 +92,12 @@ const ConnectFractions = () => {
               yellowWinnings,
             })
           }
+          // show the win on the board
+          // console.log(`winningArraysOnTheBoard`, winningArrays)
+          // showWinningTilesOnBoard(winningArrays, dispatchGameState)
         }
-        // getCoordinate({ r, c })
-        // getCoordinateValue({ x, y }, board)
+
+        // show winning arrays on the board
 
         // check Vertical
         // let verticalWinningArray = getVertical({ r, c }, board)
@@ -259,6 +262,12 @@ const ConnectFractions = () => {
     })
   }
 
+  const handleNewGame = () => {
+    dispatchGameState({
+      type: 'newGame',
+    })
+  }
+
   const gameContextValue = useMemo(() => {
     return { gameState, dispatchGameState }
   }, [gameState, dispatchGameState])
@@ -267,18 +276,34 @@ const ConnectFractions = () => {
     <GameContext.Provider value={gameContextValue}>
       <HoverContext.Provider value={{ hoverColumn, setHoverColumn }}>
         <PageContainer>
-          <div>game stage: {gameState.stage}</div>
-          <PreviousTiles previousTiles={gameState.previousTiles} />
-
           <BoardAndTilesContainer>
-            <PointData data={gameState.redWinnings} />
-            <Tiles
-              color='red'
-              tiles={[...gameState.redTiles]}
-              disabled={gameState.currentPlayer === 2}
-              replaceTile={replaceTile}
-            />
+            <PointsAndTilesContainer>
+              <PointData data={gameState.redWinnings} />
+              <Tiles
+                color='red'
+                tiles={[...gameState.redTiles]}
+                disabled={gameState.currentPlayer === 2}
+                replaceTile={replaceTile}
+              />
+            </PointsAndTilesContainer>
+
             <BoardContainer>
+              <Title>ConnectFractions</Title>
+              <Message
+                gameStage={gameState.stage}
+                message={gameState.message}
+              />
+
+              <NewGameButton
+                onClick={() => {
+                  handleNewGame()
+                }}
+              >
+                New Game
+              </NewGameButton>
+              {gameState.previousTiles.length > 0 && (
+                <UndoButton replaceTile={replaceTile} />
+              )}
               <CurrentTile />
 
               <TopRow
@@ -293,27 +318,16 @@ const ConnectFractions = () => {
                 ))}
               </MatrixContainer>
             </BoardContainer>
-            <Tiles
-              color='yellow'
-              tiles={[...gameState.yellowTiles]}
-              disabled={gameState.currentPlayer === 1}
-              replaceTile={replaceTile}
-            />
-            <PointData data={gameState.yellowWinnings} />
+            <PointsAndTilesContainer>
+              <PointData data={gameState.yellowWinnings} />
+              <Tiles
+                color='yellow'
+                tiles={[...gameState.yellowTiles]}
+                disabled={gameState.currentPlayer === 1}
+                replaceTile={replaceTile}
+              />
+            </PointsAndTilesContainer>
           </BoardAndTilesContainer>
-
-          <Message gameStage={gameState.stage} message={gameState.message} />
-
-          <NewGameButton
-            onClick={() => {
-              dispatchGameState({ type: 'newGame', board: generateNewBoard() })
-            }}
-          >
-            New Game
-          </NewGameButton>
-          {gameState.previousTiles.length > 0 && (
-            <UndoButton replaceTile={replaceTile} />
-          )}
         </PageContainer>
       </HoverContext.Provider>
     </GameContext.Provider>
@@ -321,3 +335,5 @@ const ConnectFractions = () => {
 }
 
 export default ConnectFractions
+
+// <PreviousTiles previousTiles={gameState.previousTiles} />

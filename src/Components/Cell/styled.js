@@ -19,10 +19,11 @@ justify-content: center;
   height: 80%;
   width: 80%;
   transition: background-color: 0.3s;
-  background-color: ${({ color }) =>
+  /* background-color: ${({ color }) =>
     color === 'whiteCircle'
       ? 'white'
       : color === 'redCircle'
       ? 'red'
-      : 'yellow'};
+      : 'yellow'}; */
+      background-color: ${({ color }) => `${color}`}
 `

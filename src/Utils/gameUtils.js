@@ -123,6 +123,7 @@ export const createBoard = () => {
         hidden: false,
         color: null,
         id: null,
+        winner: false,
         coordinate: {
           r,
           c,
@@ -299,7 +300,7 @@ export const findWinnersVertical = (arr) => {
   //if checking at least the third row up vertically
   if (i >= 2) {
     while (i >= 0) {
-      winningArray.push(arr[i])
+      winningArray.unshift(arr[i])
       i--
     }
     return {
@@ -492,4 +493,17 @@ const combineWinningArrays = (
     points,
     winningArrays,
   }
+}
+
+export const showWinningTilesOnBoard = (winningArrays, board, dispatch) => {
+  const boardCopy = deepCloneBoard(board)
+  winningArrays.winningArrays.forEach((winningArray) => {
+    console.log('traversed arr', winningArray)
+    winningArray.arr.forEach((item) => {
+      console.log('item', item)
+    })
+  })
+  // dispatch({
+  //   type: 'updateWinningCell',
+  // })
 }
