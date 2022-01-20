@@ -496,7 +496,7 @@ const combineWinningArrays = (
 }
 
 export const showWinningTilesOnBoard = (winningArrays, board, dispatch) => {
-  const boardCopy = deepCloneBoard(board)
+  // const boardCopy = deepCloneBoard(board)
   winningArrays.winningArrays.forEach((winningArray) => {
     console.log('traversed arr', winningArray)
     winningArray.arr.forEach((item) => {
