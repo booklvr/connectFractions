@@ -1,7 +1,7 @@
 import React, { useReducer, createContext, useState, useMemo } from 'react'
 import CurrentTile from '../../Components/CurrentTile'
 import Message from '../../Components/Message'
-import PreviousTiles from '../../Components/PreviousTiles'
+// import PreviousTiles from '../../Components/PreviousTiles'
 import Row from '../../Components/Row'
 import Tiles from '../../Components/Tiles'
 import TopRow from '../../Components/TopRow'
@@ -10,10 +10,10 @@ import PointData from '../../Components/PointData'
 // import { WinningArrays } from '../../PointData/style'
 import { gameReducer, initialGameState } from '../../reducers/gameReducer'
 import {
-  createBoard,
+  // createBoard,
   // combineWinningArrays,
   deepCloneBoard,
-  generateNewBoard,
+  // generateNewBoard,
   // getCoordinate,
   // getCoordinateValue,
   // getDiagonalDownArray,
@@ -21,7 +21,7 @@ import {
   // getHorizontalArray,
   // getVertical,
   getWinningArrays,
-  showWinningTilesOnBoard,
+  // showWinningTilesOnBoard,
 } from '../../Utils/gameUtils'
 import {
   BoardAndTilesContainer,
@@ -201,7 +201,7 @@ const ConnectFractions = () => {
         // })
         // }
       }
-      // it's gameover and a user clicked a cell
+      // it's game over and a user clicked a cell
       else {
         dispatchGameState({
           type: 'updateMessage',
