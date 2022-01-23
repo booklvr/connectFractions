@@ -277,7 +277,7 @@ export const checkFractionsEqualWholeNumber = (arr) => {
 
 // REFACTOR?????
 export const findWinnersVertical = (arr) => {
-  let wholeNumber = 0
+  let points
 
   let lastWinningCellIndex
 
@@ -285,7 +285,7 @@ export const findWinnersVertical = (arr) => {
   const reduceFraction = (acc, curVal, i) => {
     const sum = add(acc, fraction(`${curVal.num}/${curVal.den}`))
     if (sum % 1 === 0) {
-      wholeNumber += 1
+      points = sum
       lastWinningCellIndex = i
     }
     return sum
@@ -304,7 +304,7 @@ export const findWinnersVertical = (arr) => {
       i--
     }
     return {
-      points: wholeNumber,
+      points,
       arr: winningArray,
     }
   } else {
