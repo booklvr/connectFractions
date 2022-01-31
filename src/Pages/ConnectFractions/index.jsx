@@ -144,13 +144,14 @@ const ConnectFractions = () => {
         //   }
         // }
         // connect arrays
-
+        console.log('fuck1')
         addToPreviousTiles()
         // increment
+        console.log('fuxck2')
         dispatchGameState({
           type: 'increment',
         })
-
+        console.log('fuck3')
         dispatchGameState({
           type: 'updateTileValue',
           tileValue: null,
@@ -161,7 +162,7 @@ const ConnectFractions = () => {
           gameState.currentPlayer === gameState.player1
             ? gameState.player2
             : gameState.player1
-
+        console.log('fuck4')
         dispatchGameState({
           type: 'togglePlayer',
           nextPlayer,

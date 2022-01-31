@@ -18,7 +18,7 @@ export const Tile = styled.div`
   visibility: ${({ hidden }) => (hidden ? 'hidden' : 'visible')};
   background-color: ${({ color }) => (color === 'red' ? 'red' : 'yellow')};
   display: flex;
-  align-item s: center;
+  align-items: center;
   justify-content: center;
   height: calc(var(--cellWidth) * 0.9);
   width: calc(var(--cellWidth) * 0.9);

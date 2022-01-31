@@ -283,14 +283,14 @@ export const findWinnersVertical = (arr) => {
 
   // find whole numbers in the vertical array
   const reduceFraction = (acc, curVal, i) => {
-    const sum = add(acc, fraction(`${curVal.num}/${curVal.den}`))
+    const sum = number(add(acc, fraction(`${curVal.num}/${curVal.den}`)))
     if (sum % 1 === 0) {
       points = sum
       lastWinningCellIndex = i
     }
     return sum
   }
-
+  // const sum = number(arr.reduce(reduceFraction, fraction('0')))
   arr.reduce(reduceFraction, fraction('0'))
 
   //get the winning cells
