@@ -1,7 +1,7 @@
 import React, { useReducer, createContext, useState, useMemo } from 'react'
 import CurrentTile from '../../Components/CurrentTile'
 import Message from '../../Components/Message'
-// import PreviousTiles from '../../Components/PreviousTiles'
+import PreviousTiles from '../../Components/PreviousTiles'
 import Row from '../../Components/Row'
 import Tiles from '../../Components/Tiles'
 import TopRow from '../../Components/TopRow'
@@ -97,61 +97,12 @@ const ConnectFractions = () => {
           // showWinningTilesOnBoard(winningArrays, dispatchGameState)
         }
 
-        // show winning arrays on the board
-
-        // check Vertical
-        // let verticalWinningArray = getVertical({ r, c }, board)
-        // let horizontalWinningArrays = getHorizontalArray({ r, c }, board)
-        // console.log(`horizontalWinningArrays`, horizontalWinningArrays)
-        // let diagonalUpWinningArrays = getDiagonalUpArray({ r, c }, board)
-        // console.log(`diagonalUpWinningArrays`, diagonalUpWinningArrays)
-        // let diagonalDownWinningArrays = getDiagonalDownArray({ r, c }, board)
-        // console.log(`diagonalDownWinningArrays`, diagonalDownWinningArrays)
-        // let winningData = combineWinningArrays(
-        //   verticalWinningArray,
-        //   horizontalWinningArrays
-        // )
-        // console.log('winningData', winningData)
-
-        // if (winningData.winningArrays?.length) {
-        //   if (gameState.currentPlayer === 1) {
-        //     console.log('red will get these points')
-        //     // copy game state red winnings
-        //     let redWinnings = gameState.redWinnings
-        //     redWinnings.points += winningData.points
-        //     redWinnings.winningArrays = [
-        //       ...winningData.winningArrays,
-        //       ...redWinnings.winningArrays,
-        //     ]
-        //     // redWinnings.winningArrays.concat(winningData.winningArrays)
-
-        //     dispatchGameState({
-        //       type: 'updateRedWinnings',
-        //       redWinnings,
-        //     })
-        //   } else {
-        //     console.log('yellow will get these points')
-        //     let yellowWinnings = gameState.yellowWinnings
-        //     yellowWinnings.points += winningData.points
-        //     yellowWinnings.winningArrays = [
-        //       ...winningData.winningArrays,
-        //       ...yellowWinnings.winningArrays,
-        //     ]
-        //     dispatchGameState({
-        //       type: 'updateYellowWinnings',
-        //       yellowWinnings,
-        //     })
-        //   }
-        // }
         // connect arrays
-        console.log('fuck1')
         addToPreviousTiles()
         // increment
-        console.log('fuxck2')
         dispatchGameState({
           type: 'increment',
         })
-        console.log('fuck3')
         dispatchGameState({
           type: 'updateTileValue',
           tileValue: null,
@@ -162,7 +113,6 @@ const ConnectFractions = () => {
           gameState.currentPlayer === gameState.player1
             ? gameState.player2
             : gameState.player1
-        console.log('fuck4')
         dispatchGameState({
           type: 'togglePlayer',
           nextPlayer,
@@ -277,6 +227,7 @@ const ConnectFractions = () => {
     <GameContext.Provider value={gameContextValue}>
       <HoverContext.Provider value={{ hoverColumn, setHoverColumn }}>
         <PageContainer>
+          <PreviousTiles previousTiles={gameState.previousTiles} />
           <BoardAndTilesContainer>
             <PointsAndTilesContainer>
               <PointData data={gameState.redWinnings} />
@@ -336,5 +287,3 @@ const ConnectFractions = () => {
 }
 
 export default ConnectFractions
-
-// <PreviousTiles previousTiles={gameState.previousTiles} />

@@ -7,6 +7,7 @@ export const initialGameState = {
   currentPlayer: 1,
   board: createBoard(),
   redTiles: createTiles('red'),
+  yellowTiles: createTiles('yellow'),
   redWinnings: {
     team: 'red',
     points: 0,
@@ -17,7 +18,6 @@ export const initialGameState = {
     points: 0,
     winningArrays: [],
   },
-  yellowTiles: createTiles('yellow'),
   gameOver: false,
   message: 'Red: Choose a fraction.',
   tileValue: null,
@@ -31,6 +31,8 @@ export const gameReducer = (state, action) => {
     case 'newGame':
       return {
         ...initialGameState,
+        redTiles: createTiles('red'),
+        yellowTiles: createTiles('yellow'),
       }
     //3
     case 'togglePlayer':

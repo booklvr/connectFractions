@@ -4,6 +4,7 @@ import { PointDataContainer, Points, PointsHeading } from './style'
 
 const PointData = ({ data }) => {
   const heading = data.team === 'red' ? 'Red Team' : 'Yellow Team'
+  console.log(data)
 
   return (
     <PointDataContainer>

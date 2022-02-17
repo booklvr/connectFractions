@@ -189,16 +189,6 @@ export const getHorizontalArray = ({ r, c }, board) => {
   }
 
   return horizontalArray
-
-  // check the array for a winner
-  // let winningArrays = checkHorizontalArray(horizontalArray, board, c)
-  // if (winningArrays) {
-  //   console.log(`winningArray`, winningArrays)
-  // } else {
-  //   console.log('sadly we lost this round')
-  // }
-
-  // return winningArrays
 }
 
 const checkHorizontal = ({ r, c }, board) => {
