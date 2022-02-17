@@ -108,7 +108,7 @@ const ConnectFractions = () => {
           tileValue: null,
           message: null,
         })
-
+        // get the next player
         const nextPlayer =
           gameState.currentPlayer === gameState.player1
             ? gameState.player2
