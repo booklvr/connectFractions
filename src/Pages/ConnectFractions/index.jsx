@@ -62,9 +62,12 @@ const ConnectFractions = () => {
           }
         }
 
+        console.log('row', r)
+        console.log('col', c)
+
         // check for winning arrays
         let winningArrays = getWinningArrays({ r, c }, board)
-        console.log(`winningArrays`, winningArrays)
+        // console.log(`winningArrays`, winningArrays)
         if (winningArrays.winningArrays.length) {
           if (gameState.currentPlayer === 1) {
             console.log('red will get these points')
@@ -98,7 +101,7 @@ const ConnectFractions = () => {
         }
 
         // connect arrays
-        addToPreviousTiles()
+        addToPreviousTurns(winningArrays)
         // increment
         dispatchGameState({
           type: 'increment',
@@ -108,7 +111,7 @@ const ConnectFractions = () => {
           tileValue: null,
           message: null,
         })
-        // get the next player
+
         const nextPlayer =
           gameState.currentPlayer === gameState.player1
             ? gameState.player2
@@ -204,12 +207,27 @@ const ConnectFractions = () => {
     }
   }
 
-  const addToPreviousTiles = () => {
-    let previousTiles = [...gameState.previousTiles]
-    previousTiles.unshift(gameState.tileValue)
+  const addToPreviousTurns = (winningArrays) => {
+    console.log('winningArrays :>> ', winningArrays)
+    let previousTurns = [...gameState.previousTurns]
+
+    console.log('previousTurns :>> ', previousTurns)
+
+    const previousTurn = {
+      tile: gameState.tileValue,
+      winningArrays: winningArrays,
+    }
+
+    // i need to know the winning arrays
+    // i need to know the tile position
+    // i need to know the tile for that turn
+
+    // let previousTurn =
+    previousTurns.unshift(previousTurn)
+    console.log('previousTurns :>> ', previousTurns)
     dispatchGameState({
-      type: 'updatePreviousTiles',
-      previousTiles,
+      type: 'updatePreviousTurns',
+      previousTurns,
     })
   }
 
@@ -227,7 +245,7 @@ const ConnectFractions = () => {
     <GameContext.Provider value={gameContextValue}>
       <HoverContext.Provider value={{ hoverColumn, setHoverColumn }}>
         <PageContainer>
-          <PreviousTiles previousTiles={gameState.previousTiles} />
+          <PreviousTiles previousTurns={gameState.previousTurns} />
           <BoardAndTilesContainer>
             <PointsAndTilesContainer>
               <PointData data={gameState.redWinnings} />
@@ -253,7 +271,7 @@ const ConnectFractions = () => {
               >
                 New Game
               </NewGameButton>
-              {gameState.previousTiles.length > 0 && (
+              {gameState.previousTurns.length > 0 && (
                 <UndoButton replaceTile={replaceTile} />
               )}
               <CurrentTile />

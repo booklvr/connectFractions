@@ -21,7 +21,7 @@ export const initialGameState = {
   gameOver: false,
   message: 'Red: Choose a fraction.',
   tileValue: null,
-  previousTiles: [],
+  previousTurns: [],
 }
 
 export const gameReducer = (state, action) => {
@@ -69,10 +69,10 @@ export const gameReducer = (state, action) => {
         tileValue: action.tileValue,
       }
     // 8
-    case 'updatePreviousTiles':
+    case 'updatePreviousTurns':
       return {
         ...state,
-        previousTiles: action.previousTiles,
+        previousTurns: action.previousTurns,
       }
     // 9
     case 'updateRedTiles':
@@ -103,7 +103,7 @@ export const gameReducer = (state, action) => {
     case 'undoPreviousMove':
       return {
         ...state,
-        previousTiles: action.previousTiles,
+        previousTurns: action.previousTurns,
         tileValue: null,
         stage: action.stage,
         currentPlayer: state.currentPlayer === 1 ? 2 : 1,

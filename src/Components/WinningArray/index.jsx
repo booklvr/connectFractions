@@ -4,8 +4,8 @@ import { FaPlus, FaEquals } from 'react-icons/fa'
 
 const WinningArray = ({ arr: { arr, sum } }) => {
   useEffect(() => {
-    console.log('arr', arr)
-    console.log('sum', sum)
+    // console.log('arr', arr)
+    // console.log('sum', sum)
   }, [arr, sum])
 
   return (

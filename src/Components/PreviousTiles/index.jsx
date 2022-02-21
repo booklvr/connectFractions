@@ -5,18 +5,20 @@ import { PreviousTile } from './style'
 
 const PreviousTiles = () => {
   const {
-    gameState: { previousTiles },
+    gameState: { previousTurns },
   } = useContext(GameContext)
   return (
     <PreviousTilesContainer>
-      {previousTiles.length > 0 &&
-        previousTiles.map((tile, index) => (
-          <PreviousTile key={index} color={tile.color}>
-            <sup>{tile.num}</sup>&frasl;<sub>{tile.den}</sub>
-          </PreviousTile>
-        ))}
+      <p>hello</p>
     </PreviousTilesContainer>
   )
 }
 
 export default PreviousTiles
+
+// {previousTiles.length > 0 &&
+//   previousTiles.map((tile, index) => (
+//     <PreviousTile key={index} color={tile.color}>
+//       <sup>{tile.num}</sup>&frasl;<sub>{tile.den}</sub>
+//     </PreviousTile>
+//   ))}

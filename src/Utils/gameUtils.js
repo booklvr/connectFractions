@@ -1,4 +1,5 @@
 import { add, fraction, number } from 'mathjs'
+import uuid from 'react-uuid'
 
 export const deepCloneBoard = (board) => [
   [...board[0]],
@@ -232,6 +233,8 @@ export const getWinningArrays = ({ r, c }, board) => {
     diagonalDown
   )
 
+  console.log('winningArrays :>> ', winningArrays)
+
   return winningArrays
 }
 
@@ -435,7 +438,7 @@ const combineWinningArrays = (
   let i = 1
   let points = 0
   if (vertical) {
-    console.log(`(${i++}). vertical:`, vertical)
+    // console.log(`(${i++}). vertical:`, vertical)
     points += vertical.points
     winningArrays.push({
       sum: vertical.points,
@@ -444,7 +447,7 @@ const combineWinningArrays = (
   }
 
   if (horizontal?.length) {
-    horizontal.forEach((arr) => console.log(`(${i++}). horizontal:`, arr))
+    // horizontal.forEach((arr) => console.log(`(${i++}). horizontal:`, arr))
 
     horizontal.forEach((arr) => {
       points += arr.points
@@ -456,7 +459,7 @@ const combineWinningArrays = (
   }
 
   if (diagonalUp?.length) {
-    diagonalUp.forEach((arr) => console.log(`(${i++}). diagonalUp:`, arr))
+    // diagonalUp.forEach((arr) => console.log(`(${i++}). diagonalUp:`, arr))
 
     diagonalUp.forEach((arr) => {
       points += arr.points
@@ -468,7 +471,7 @@ const combineWinningArrays = (
   }
 
   if (diagonalDown?.length) {
-    diagonalDown.forEach((arr) => console.log(`(${i++}). diagonalDown:`, arr))
+    // diagonalDown.forEach((arr) => console.log(`(${i++}). diagonalDown:`, arr))
 
     diagonalDown.forEach((arr) => {
       points += arr.points
@@ -481,6 +484,7 @@ const combineWinningArrays = (
 
   return {
     points,
+    id: uuid(),
     winningArrays,
   }
 }
