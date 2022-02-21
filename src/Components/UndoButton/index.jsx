@@ -3,75 +3,62 @@ import { GameContext } from '../../Pages/ConnectFractions'
 import { deepCloneBoard } from '../../Utils/gameUtils'
 import { UndoButtonContainer } from './style'
 
-const UndoButton = ({ replaceTile }) => {
+const UndoButton = () => {
   const { gameState, dispatchGameState } = useContext(GameContext)
 
-  const removeTileFromBoard = (lastTile) => {
+  const removeTileFromBoard = ({ r, c }) => {
     let board = deepCloneBoard(gameState.board)
-    for (let i = 5; i >= 0; i--) {
-      const foundIndex = board[i].findIndex((col) => col?.id === lastTile.id)
-      if (foundIndex >= 0) {
-        const coordinate = board[i][foundIndex].coordinate
-        board[i][foundIndex] = {
-          val: null,
-          num: null,
-          den: null,
-          hidden: false,
-          color: null,
-          id: null,
-          coordinate,
-        }
-        dispatchGameState({
-          type: 'updateBoard',
-          board,
-          currentPlayer: lastTile.color === 'red' ? 1 : 2,
-        })
-        break
-      }
+    board[r][c] = {
+      val: null,
+      num: null,
+      den: null,
+      hidden: false,
+      color: null,
+      coordinate: { r, c },
     }
+    return board
   }
 
-  const removeWinningArray = (winningArrays, tile) => {
-    console.log('removeWinningArray')
-    console.log('winningArrays', winningArrays)
-    console.log('id :>> ', winningArrays.id)
-    console.log('tile', tile.color)
-
+  const removeWinningArrays = (lastTurn) => {
     // if there were winning arrays
-    if (winningArrays.points > 0) {
-      console.log('we had a winner')
+    const redWinnings = gameState.redWinnings
+    const yellowWinnings = gameState.yellowWinnings
 
-      if (tile.color === 'red') {
-        console.log('we had a red winner')
-        console.log(`red had ${winningArrays.winningArrays.length} wins`)
-        const redWinnings = gameState.redWinnings
-        console.log('redWinnings', redWinnings)
-        redWinnings.points = redWinnings.points - winningArrays.points
-        redWinnings.winningArrays.splice(0, winningArrays.winningArrays.length)
+    console.log('lastTurn', lastTurn)
 
-        console.log('redWinnings', redWinnings)
-        // dispatchGameState({
-        //   type: 'updateRedWinnings',
-        //   redWinnings,
-        // })
+    if (lastTurn.points) {
+      if (lastTurn.tile.color === 'red') {
+        console.log('red tile')
+        redWinnings.points -= lastTurn.points
+        redWinnings.winningArrays.splice(0, lastTurn.numberOfWins)
       } else {
-        console.log('we had a yellow winner')
-        console.log(`yellow had ${winningArrays.winningArrays.length} wins`)
-        const yellowWinnings = gameState.yellowWinnings
-        console.log('yellowWinnings', yellowWinnings)
-        yellowWinnings.points = yellowWinnings.points - winningArrays.points
-        yellowWinnings.winningArrays.splice(
-          0,
-          winningArrays.winningArrays.length
-        )
-
-        console.log('yellowWinnings', yellowWinnings)
+        yellowWinnings.points -= lastTurn.points
+        yellowWinnings.winningArrays.splice(0, lastTurn.numberOfWins)
       }
-
-      // dispatch('removeRedWinningArrays')
-    } else {
-      console.log("let's move on, no winner to see here")
     }
+
+    return { redWinnings, yellowWinnings }
+  }
+
+  const replaceTile = (lastTile) => {
+    const yellowTiles = gameState.yellowTiles
+    const redTiles = gameState.redTiles
+
+    if (lastTile.color === 'red') {
+      // red tile
+
+      let index = redTiles.findIndex((tile) => tile.id === lastTile.id)
+      redTiles[index].hidden = false
+
+      // redTiles[index].hidden = false
+    } else {
+      // yellow tile
+
+      let index = yellowTiles.findIndex((tile) => tile.id === lastTile.id)
+
+      yellowTiles[index].hidden = false
+    }
+    return { redTiles, yellowTiles }
   }
 
   const handleUndo = () => {
@@ -80,6 +67,8 @@ const UndoButton = ({ replaceTile }) => {
 
     // get the last tile and remove it from the previous array
     const lastTurn = previousTurns.shift()
+
+    console.log('lastTurn', lastTurn)
 
     // revert to previous game Stage 1 or 3
     let stage = gameState.stage
@@ -90,18 +79,26 @@ const UndoButton = ({ replaceTile }) => {
       stage = 3
     }
 
+    const { redTiles, yellowTiles } = replaceTile(lastTurn.tile)
+    const { redWinnings, yellowWinnings } = removeWinningArrays(lastTurn)
+
     dispatchGameState({
       type: 'undoPreviousMove',
       previousTurns,
+      yellowTiles,
+      redTiles,
+      redWinnings,
+      yellowWinnings,
+      board: removeTileFromBoard(lastTurn.position),
       stage,
     })
 
     // remove Previous Winning Arrrays
 
     // replace the previousTile
-    replaceTile(lastTurn.tile)
-    removeTileFromBoard(lastTurn.tile)
-    removeWinningArray(lastTurn.winningArrays, lastTurn.tile)
+    // replaceTile(lastTurn.tile)
+    // removeTileFromBoard(lastTurn.tile)
+    // removeWinningArray(lastTurn.winningArrays, lastTurn.tile)
   }
 
   return <UndoButtonContainer onClick={handleUndo}>undo</UndoButtonContainer>

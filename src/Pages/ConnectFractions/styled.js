@@ -12,15 +12,26 @@ export const PageContainer = styled.div`
 export const BoardAndTilesContainer = styled.div`
   display: flex;
   flex-direction: row;
-  align-items: flex-start;
-  margin-
+  align-items: space-between;
 `
 
 export const BoardContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin: 0 10px;
-  align-self: flex-end;
+
+  width: 100%;
+`
+
+export const GameTitleAndButtonsContainer = styled.div`
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  /* height: var(--cellWidth * 6); */
+  margin: 0;
+  padding: 0;
 `
 
 export const MatrixContainer = styled.div`
@@ -28,16 +39,16 @@ export const MatrixContainer = styled.div`
   border-radius: 10px;
 `
 
-export const GameButtonsContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-`
-
 export const NewGameButton = styled.button`
   cursor: pointer;
   width: 10rem;
+  height: 2rem;
+
+  transition: all 0.1s ease;
+
+  &:hover {
+    transform: scale(1.1);
+  }
 `
 
 export const PreviousTilesContainer = styled.div`
@@ -57,4 +68,15 @@ export const PointsAndTilesContainer = styled.div`
 export const Title = styled.h1`
   width: 100%;
   text-align: center;
+`
+
+export const ButtonsContainer = styled.div`
+  margin-top: 1rem;
+
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  color: lightgrey;
 `

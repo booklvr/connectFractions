@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import { GameContext } from '../../Pages/ConnectFractions'
 import { Tile, TilesContainer } from './style'
 
-const Tiles = ({ color, tiles, disabled, gameStage, replaceTile }) => {
+const Tiles = ({ color, tiles, disabled, gameStage }) => {
   const { gameState, dispatchGameState } = useContext(GameContext)
 
   const hideTile = (tile) => {
@@ -27,11 +27,40 @@ const Tiles = ({ color, tiles, disabled, gameStage, replaceTile }) => {
     }
   }
 
+  const replaceCurrentTile = (tile) => {
+    // RED TILE
+    if (tile.color === 'red') {
+      // create copy of the red tiles
+      const redTiles = [...gameState.redTiles]
+      const foundIndex = redTiles.findIndex((x) => x.id === tile.id)
+      // update the found index to hidden
+      redTiles[foundIndex].hidden = !redTiles[foundIndex].hidden
+      // show hidden tile
+      dispatchGameState({
+        type: 'updateRedTiles',
+        redTiles,
+      })
+    } else if (tile.color === 'yellow') {
+      // YELLOW TILE
+      // create copy of the yellow tiles
+      const yellowTiles = [...gameState.yellowTiles]
+      // remove yellow tile from yellow tiles and add to the board
+      const foundIndex = yellowTiles.findIndex((x) => x.id === tile.id)
+      yellowTiles[foundIndex].hidden = !yellowTiles[foundIndex].hidden
+      // show hidden tile
+      dispatchGameState({
+        type: 'updateYellowTiles',
+        yellowTiles,
+      })
+    }
+  }
+
   const chooseTile = (tile) => {
     // check if stage 1 or 2 or 3 or 4
     switch (gameState.stage) {
       case 1:
       case 3:
+        // add tile to currentTile
         dispatchGameState({
           type: 'updateTileValue',
           tileValue: tile,
@@ -44,7 +73,7 @@ const Tiles = ({ color, tiles, disabled, gameStage, replaceTile }) => {
       case 2:
       case 4:
         // add the current tile back to the array
-        replaceTile(gameState.tileValue)
+        replaceCurrentTile(gameState.tileValue)
         dispatchGameState({
           type: 'updateTileValue',
           tileValue: tile,

@@ -3,7 +3,6 @@ import WinningArray from '../WinningArray'
 import { WinningArraysContainer } from './style'
 
 const WinningArrays = ({ winningArrays }) => {
-  //   console.log(`winningArrays`, winningArrays)
   return (
     <WinningArraysContainer>
       {winningArrays.map((arr, i) => (

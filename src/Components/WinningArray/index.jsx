@@ -3,10 +3,8 @@ import { Fraction, Sum, WinningArrayContainer, WinningTile } from './style'
 import { FaPlus, FaEquals } from 'react-icons/fa'
 
 const WinningArray = ({ arr: { arr, sum } }) => {
-  useEffect(() => {
-    // console.log('arr', arr)
-    // console.log('sum', sum)
-  }, [arr, sum])
+  // useEffect(() => {
+  // }, [arr, sum])
 
   return (
     <WinningArrayContainer>

@@ -8,6 +8,7 @@ export const initialGameState = {
   board: createBoard(),
   redTiles: createTiles('red'),
   yellowTiles: createTiles('yellow'),
+  // winningArrays: [],
   redWinnings: {
     team: 'red',
     points: 0,
@@ -18,7 +19,7 @@ export const initialGameState = {
     points: 0,
     winningArrays: [],
   },
-  gameOver: false,
+  // gameOver: false,
   message: 'Red: Choose a fraction.',
   tileValue: null,
   previousTurns: [],
@@ -33,15 +34,24 @@ export const gameReducer = (state, action) => {
         ...initialGameState,
         redTiles: createTiles('red'),
         yellowTiles: createTiles('yellow'),
+        redWinnings: {
+          team: 'red',
+          points: 0,
+          winningArrays: [],
+        },
+        yellowWinnings: {
+          team: 'yellow',
+          points: 0,
+          winningArrays: [],
+        },
       }
     //3
-    case 'togglePlayer':
-      return {
-        ...state,
-        currentPlayer: action.nextPlayer,
-        board: action.board,
-        message: action.message,
-      }
+    // case 'togglePlayer':
+    //   return {
+    //     ...state,
+    //     currentPlayer: action.nextPlayer,
+    //     board: action.board,
+    //   }
     //4
     case 'endGame':
       return {
@@ -51,11 +61,11 @@ export const gameReducer = (state, action) => {
         board: action.board,
       }
     //5
-    case 'updateMessage':
-      return {
-        ...state,
-        message: action.message,
-      }
+    // case 'updateMessage':
+    //   return {
+    //     ...state,
+    //     message: action.message,
+    //   }
     //6
     case 'updateHoverColumn':
       return {
@@ -107,6 +117,7 @@ export const gameReducer = (state, action) => {
         tileValue: null,
         stage: action.stage,
         currentPlayer: state.currentPlayer === 1 ? 2 : 1,
+        board: action.board,
       }
     case 'updateRedWinnings':
       return {
@@ -122,6 +133,15 @@ export const gameReducer = (state, action) => {
       return {
         ...state,
         board: action.board,
+      }
+    case 'endTurn':
+      return {
+        ...state,
+        previousTurns: [action.turn, ...state.previousTurns],
+        stage: state.stage === 4 ? 1 : state.stage + 1,
+        tileValue: null,
+        board: action.board,
+        currentPlayer: state.currentPlayer === 1 ? 2 : 1,
       }
     // case 10
 

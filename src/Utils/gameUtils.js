@@ -124,7 +124,6 @@ export const createBoard = () => {
         hidden: false,
         color: null,
         id: null,
-        winner: false,
         coordinate: {
           r,
           c,
@@ -137,12 +136,10 @@ export const createBoard = () => {
 }
 
 // export const getCoordinate = ({ r, c }) => {
-//   console.log('getCoordinate')
 //   console.log(`col: [${r}, ${c}]`)
 // }
 
 // export const getCoordinateValue = ({ r, c }, board) => {
-//   console.log('getCoordinateValue')
 //   console.log(board[r][c])
 // }
 
@@ -150,20 +147,19 @@ const getVerticalArray = ({ r, c }, board) => {
   const verticalArray = []
   for (var i = r; i < 6; i++) {
     verticalArray.push(board[i][c])
-    // console.log('verticalArr', verticalArr)
   }
   return verticalArray
 }
 
-const checkVertical = ({ r, c }, board) => {
+const checkVertical = (r, c, board) => {
   // get vertical array
-  const verticalArray = getVerticalArray({ r, c }, board)
+  const verticalArray = getVerticalArray(r, c, board)
 
   const winners = findWinnersVertical(verticalArray)
   return winners
 }
 
-export const getHorizontalArray = ({ r, c }, board) => {
+export const getHorizontalArray = (r, c, board) => {
   let horizontalArray = []
 
   let row = r
@@ -192,62 +188,45 @@ export const getHorizontalArray = ({ r, c }, board) => {
   return horizontalArray
 }
 
-const checkHorizontal = ({ r, c }, board) => {
+const checkHorizontal = (r, c, board) => {
   //get horizontal array
-  const array = getHorizontalArray({ r, c }, board)
+  const array = getHorizontalArray(r, c, board)
   const winners = findWinners(array, board, c)
 
   return winners
 }
 
-const checkDiagonalUp = ({ r, c }, board) => {
+const checkDiagonalUp = (r, c, board) => {
   //get horizontal array
-  const array = getDiagonalUpArray({ r, c }, board)
+  const array = getDiagonalUpArray(r, c, board)
   const winners = findWinners(array, board, c)
 
   return winners
 }
 
-const checkDiagonalDown = ({ r, c }, board) => {
+const checkDiagonalDown = (r, c, board) => {
   //get horizontal array
-  const array = getDiagonalDownArray({ r, c }, board)
+  const array = getDiagonalDownArray(r, c, board)
   const winners = findWinners(array, board, c)
 
   return winners
 }
 
-export const getWinningArrays = ({ r, c }, board) => {
-  const vertical = checkVertical({ r, c }, board)
-  console.log('vertical', vertical)
-  const horizontal = checkHorizontal({ r, c }, board)
-  console.log(`horizontal`, horizontal)
-  const diagonalUp = checkDiagonalUp({ r, c }, board)
-  console.log(`diagonalUp`, diagonalUp)
-  const diagonalDown = checkDiagonalDown({ r, c }, board)
-  console.log(`diagonalDown`, diagonalDown)
+export const getWinningArrays = (r, c, board) => {
+  const vertical = checkVertical(r, c, board)
+  const horizontal = checkHorizontal(r, c, board)
+  const diagonalUp = checkDiagonalUp(r, c, board)
+  const diagonalDown = checkDiagonalDown(r, c, board)
 
-  let winningArrays = combineWinningArrays(
+  let { points, winningArrays } = combineWinningArrays(
     vertical,
     horizontal,
     diagonalUp,
     diagonalDown
   )
 
-  console.log('winningArrays :>> ', winningArrays)
-
-  return winningArrays
+  return { points, winningArrays }
 }
-
-// REMOVE
-// export const getVertical = ({ r, c }, board) => {
-//   const verticalArr = []
-//   for (var i = r; i < 6; i++) {
-//     verticalArr.push(board[i][c])
-//     // console.log('verticalArr', verticalArr)
-//   }
-//   let isWinningArray = getWholeNumbers(verticalArr)
-//   return isWinningArray
-// }
 
 export const checkFractionsEqualWholeNumber = (arr) => {
   // winning array must be at least three tiles
@@ -305,9 +284,7 @@ export const findWinnersVertical = (arr) => {
   }
 }
 
-export const getDiagonalUpArray = ({ r, c }, board) => {
-  // console.log('getDiagonalUpArray')
-
+export const getDiagonalUpArray = (r, c, board) => {
   let array = []
 
   let row = r
@@ -337,13 +314,10 @@ export const getDiagonalUpArray = ({ r, c }, board) => {
     rightRow--
   }
 
-  // console.log(`array`, array)
   return array
 }
 
-export const getDiagonalDownArray = ({ r, c }, board) => {
-  // console.log('getDiagonalDownArray')
-
+export const getDiagonalDownArray = (r, c, board) => {
   let array = []
 
   let row = r
@@ -435,10 +409,10 @@ const combineWinningArrays = (
   diagonalUp
 ) => {
   let winningArrays = []
-  let i = 1
   let points = 0
+
+  // add vertical wins
   if (vertical) {
-    // console.log(`(${i++}). vertical:`, vertical)
     points += vertical.points
     winningArrays.push({
       sum: vertical.points,
@@ -446,9 +420,8 @@ const combineWinningArrays = (
     })
   }
 
+  // add horizontal wins
   if (horizontal?.length) {
-    // horizontal.forEach((arr) => console.log(`(${i++}). horizontal:`, arr))
-
     horizontal.forEach((arr) => {
       points += arr.points
       winningArrays.push({
@@ -458,9 +431,8 @@ const combineWinningArrays = (
     })
   }
 
+  // add diagonal up wins
   if (diagonalUp?.length) {
-    // diagonalUp.forEach((arr) => console.log(`(${i++}). diagonalUp:`, arr))
-
     diagonalUp.forEach((arr) => {
       points += arr.points
       winningArrays.push({
@@ -470,9 +442,8 @@ const combineWinningArrays = (
     })
   }
 
+  // add diagonal down wins
   if (diagonalDown?.length) {
-    // diagonalDown.forEach((arr) => console.log(`(${i++}). diagonalDown:`, arr))
-
     diagonalDown.forEach((arr) => {
       points += arr.points
       winningArrays.push({
@@ -487,17 +458,4 @@ const combineWinningArrays = (
     id: uuid(),
     winningArrays,
   }
-}
-
-export const showWinningTilesOnBoard = (winningArrays, board, dispatch) => {
-  // const boardCopy = deepCloneBoard(board)
-  winningArrays.winningArrays.forEach((winningArray) => {
-    console.log('traversed arr', winningArray)
-    winningArray.arr.forEach((item) => {
-      console.log('item', item)
-    })
-  })
-  // dispatch({
-  //   type: 'updateWinningCell',
-  // })
 }
