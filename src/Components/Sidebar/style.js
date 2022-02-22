@@ -13,7 +13,7 @@ const buttonStyles = css`
   cursor: pointer;
 
   &:hover {
-    transform: scale(1.1);
+    transform: scale(1.2);
   }
 `
 
@@ -27,6 +27,7 @@ export const RightArrow = styled(BiArrowFromRight)`
 
 export const UndoButton = styled(BiUndo)`
   ${buttonStyles}
+  color: ${({ active }) => (active !== 0 ? 'white' : 'grey')}
 `
 
 export const PlayAgainButton = styled(BiRefresh)`
@@ -65,12 +66,40 @@ export const SideBarHeader = styled.h2`
 `
 
 export const SidebarOptionText = styled.h3`
-  color: white;
+  color: ${({ active }) => (active !== 0 ? 'white' : 'grey')};
   font-family: 'Kbreindeergames', arial;
   font-size: 1.2rem;
   cursor: pointer;
+  /* color: white; */
 
   &:hover {
-    border-bottom: 2px solid white;
+    border-bottom: ${({ active }) =>
+      active !== 0 ? '2px solid white' : 'none'};
   }
+`
+
+export const GameModeHeader = styled.h3`
+  color: white;
+  font-family: 'Kbreindeergames', arial;
+  font-size: 1.5rem;
+  border-bottom: 4px solid white;
+`
+
+export const ModeButtonStyle = css`
+  color: white;
+  font-family: 'Kbreindeergames', arial;
+  font-size: 1.2rem;
+  padding: 0.2rem;
+  margin: 0.8rem;
+  background-color: black;
+  cursor: pointer;
+  border: ${({ border }) => (border ? '3px solid white' : 'none')};
+`
+
+export const EasyModeButton = styled.button`
+  ${ModeButtonStyle}
+`
+
+export const HardModeButton = styled.button`
+  ${ModeButtonStyle}
 `

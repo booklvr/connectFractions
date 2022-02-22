@@ -3,6 +3,9 @@ import { GameContext } from '../../Pages/ConnectFractions'
 import { deepCloneBoard } from '../../Utils/gameUtils'
 
 import {
+  EasyModeButton,
+  GameModeHeader,
+  HardModeButton,
   LeftArrow,
   PlayAgainButton,
   RightArrow,
@@ -19,9 +22,11 @@ const Sidebar = () => {
   const { gameState, dispatchGameState } = useContext(GameContext)
 
   const handleNewGame = () => {
-    dispatchGameState({
-      type: 'newGame',
-    })
+    if (window.confirm('Are you sure you want to start a new Game?')) {
+      dispatchGameState({
+        type: 'newGame',
+      })
+    }
   }
 
   const removeTileFromBoard = ({ r, c }) => {
@@ -80,6 +85,8 @@ const Sidebar = () => {
     // copy the array
     let previousTurns = [...gameState.previousTurns]
 
+    if (previousTurns.length === 0) return
+
     // get the last tile and remove it from the previous array
     const lastTurn = previousTurns.shift()
 
@@ -106,6 +113,35 @@ const Sidebar = () => {
       stage,
     })
   }
+
+  const handleEasyMode = () => {
+    if (gameState.mode === 'easy') return
+
+    if (
+      window.confirm(
+        'Are you sure you want to change Modes? Doing so will restart the game.'
+      )
+    ) {
+      dispatchGameState({
+        type: 'easyMode',
+      })
+    }
+  }
+
+  const handleHardMode = () => {
+    if (gameState.mode === 'hard') return
+
+    if (
+      window.confirm(
+        'Are you sure you want to change Modes? Doing so will restart the game.'
+      )
+    ) {
+      dispatchGameState({
+        type: 'hardMode',
+      })
+    }
+  }
+
   return (
     <SidebarContainer showSidebar={showSidebar}>
       <SidebarRow>
@@ -130,9 +166,25 @@ const Sidebar = () => {
         <SidebarOptionText>New Game</SidebarOptionText>
       </SidebarRow>
       <SidebarRow onClick={handleUndo}>
-        <UndoButton />
-        <SidebarOptionText>Undo</SidebarOptionText>
+        <UndoButton active={gameState.previousTurns.length} />
+        <SidebarOptionText active={gameState.previousTurns.length}>
+          Undo
+        </SidebarOptionText>
       </SidebarRow>
+
+      <GameModeHeader>Difficulty</GameModeHeader>
+      <EasyModeButton
+        border={gameState.mode === 'easy'}
+        onClick={handleEasyMode}
+      >
+        Easy
+      </EasyModeButton>
+      <HardModeButton
+        border={gameState.mode === 'hard'}
+        onClick={handleHardMode}
+      >
+        Hard
+      </HardModeButton>
     </SidebarContainer>
   )
 }

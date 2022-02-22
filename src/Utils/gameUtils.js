@@ -94,6 +94,41 @@ export const generateNewBoard = () => [
 //   )
 // }
 
+function EasyObject(num, den, color) {
+  this.val = num / den
+  this.num = num
+  this.den = den
+  this.hidden = false
+  this.color = color
+  this.id = `${color === 'red' ? 1 : 2}${num}${den}`
+}
+
+export const createEasyTiles = (color) => {
+  return [
+    new EasyObject(1, 2, color),
+    new EasyObject(1, 3, color),
+    new EasyObject(2, 3, color),
+    new EasyObject(1, 4, color),
+    new EasyObject(2, 4, color),
+    new EasyObject(3, 4, color),
+    new EasyObject(2, 6, color),
+    new EasyObject(3, 6, color),
+    new EasyObject(4, 6, color),
+    new EasyObject(2, 8, color),
+    new EasyObject(4, 8, color),
+    new EasyObject(6, 8, color),
+    new EasyObject(5, 10, color),
+    new EasyObject(2, 12, color),
+    new EasyObject(3, 12, color),
+    new EasyObject(4, 12, color),
+    new EasyObject(6, 12, color),
+    new EasyObject(8, 12, color),
+    new EasyObject(9, 12, color),
+    new EasyObject(5, 15, color),
+    new EasyObject(10, 15, color),
+  ]
+}
+
 export const createTiles = (color) => {
   const initialArray = []
   for (var i = 1; i <= 7; i++) {
@@ -146,9 +181,6 @@ const getVerticalArray = (r, c, board) => {
 const checkVertical = (r, c, board) => {
   // get vertical array
   const verticalArray = getVerticalArray(r, c, board)
-
-  console.log('checkVertical')
-  console.log('verticalArray', verticalArray)
 
   const winners = findWinnersVertical(verticalArray)
   return winners
@@ -209,7 +241,6 @@ const checkDiagonalDown = (r, c, board) => {
 
 export const getWinningArrays = (r, c, board) => {
   const vertical = checkVertical(r, c, board)
-  console.log('vertical? ==> ', vertical)
   const horizontal = checkHorizontal(r, c, board)
   const diagonalUp = checkDiagonalUp(r, c, board)
   const diagonalDown = checkDiagonalDown(r, c, board)

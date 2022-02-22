@@ -1,4 +1,4 @@
-import { createBoard, createTiles } from '../Utils/gameUtils'
+import { createBoard, createTiles, createEasyTiles } from '../Utils/gameUtils'
 
 export const initialGameState = {
   stage: 1,
@@ -23,13 +23,50 @@ export const initialGameState = {
   message: 'Red: Choose a fraction.',
   tileValue: null,
   previousTurns: [],
+  mode: 'easy',
 }
 
 export const gameReducer = (state, action) => {
-  //1
   switch (action.type) {
-    //2
     case 'newGame':
+      return {
+        ...initialGameState,
+        redTiles:
+          state.mode === 'easy' ? createTiles('red') : createEasyTiles('red'),
+        yellowTiles:
+          state.mode === 'easy'
+            ? createTiles('yellow')
+            : createEasyTiles('yellow'),
+        redWinnings: {
+          team: 'red',
+          points: 0,
+          winningArrays: [],
+        },
+        yellowWinnings: {
+          team: 'yellow',
+          points: 0,
+          winningArrays: [],
+        },
+      }
+
+    case 'easyMode':
+      return {
+        ...initialGameState,
+        redTiles: createEasyTiles('red'),
+        yellowTiles: createEasyTiles('yellow'),
+        redWinnings: {
+          team: 'red',
+          points: 0,
+          winningArrays: [],
+        },
+        yellowWinnings: {
+          team: 'yellow',
+          points: 0,
+          winningArrays: [],
+        },
+        mode: 'easy',
+      }
+    case 'hardMode':
       return {
         ...initialGameState,
         redTiles: createTiles('red'),
@@ -44,29 +81,9 @@ export const gameReducer = (state, action) => {
           points: 0,
           winningArrays: [],
         },
+        mode: 'hard',
       }
-    //3
-    // case 'togglePlayer':
-    //   return {
-    //     ...state,
-    //     currentPlayer: action.nextPlayer,
-    //     board: action.board,
-    //   }
-    //4
-    case 'endGame':
-      return {
-        ...state,
-        gameOver: true,
-        message: action.message,
-        board: action.board,
-      }
-    //5
-    // case 'updateMessage':
-    //   return {
-    //     ...state,
-    //     message: action.message,
-    //   }
-    //6
+
     case 'updateHoverColumn':
       return {
         ...state,
