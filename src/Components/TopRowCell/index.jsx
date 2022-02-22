@@ -35,12 +35,13 @@ const TopRowCell = ({ column, play }) => {
         show={hoverColumn === column}
         tileValue={tileValue}
       >
-        {tileValue && (
+        {(tileValue && (
           <>
             <sub>{tileValue.num}</sub>&frasl;
             <sub>{tileValue.den}</sub>
           </>
-        )}
+        )) ||
+          '?'}
       </TopRowCircle>
     </TopRowCellContainer>
   )

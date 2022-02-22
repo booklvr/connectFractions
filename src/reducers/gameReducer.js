@@ -84,44 +84,25 @@ export const gameReducer = (state, action) => {
         mode: 'hard',
       }
 
-    case 'updateHoverColumn':
-      return {
-        ...state,
-        hoverColumn: action.column,
-      }
-    //7
     case 'updateTileValue':
       return {
         ...state,
         tileValue: action.tileValue,
       }
-    // 8
-    case 'updatePreviousTurns':
-      return {
-        ...state,
-        previousTurns: action.previousTurns,
-      }
-    // 9
+
     case 'updateRedTiles':
       return {
         ...state,
         redTiles: action.redTiles,
         message: action.message,
       }
-    // 10
     case 'updateYellowTiles':
       return {
         ...state,
         yellowTiles: action.yellowTiles,
         message: action.message,
       }
-    // 11
-    case 'updateBoard':
-      return {
-        ...state,
-        board: action.board,
-        currentPlayer: action.currentPlayer,
-      }
+
     case 'increment':
       return {
         ...state,
@@ -146,11 +127,7 @@ export const gameReducer = (state, action) => {
         ...state,
         yellowWinnings: action.yellowWinnings,
       }
-    case 'updateWinningCell':
-      return {
-        ...state,
-        board: action.board,
-      }
+
     case 'endTurn':
       return {
         ...state,
