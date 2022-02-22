@@ -1,20 +1,17 @@
-import React, { useContext } from 'react'
-import { GameContext } from '../../Pages/ConnectFractions'
-import { PreviousTilesContainer } from '../../Pages/ConnectFractions/styled'
-import { PreviousTile } from './style'
+// import React, { useContext } from 'react'
+// import { GameContext } from '../../Pages/ConnectFractions'
+// import { PreviousTilesContainer } from '../../Pages/ConnectFractions/styled'
 
-const PreviousTiles = () => {
-  const {
-    gameState: { previousTurns },
-  } = useContext(GameContext)
-  return (
-    <PreviousTilesContainer>
-      <p>hello</p>
-    </PreviousTilesContainer>
-  )
-}
+// const PreviousTiles = () => {
 
-export default PreviousTiles
+//   return (
+//     <PreviousTilesContainer>
+//       <p>hello</p>
+//     </PreviousTilesContainer>
+//   )
+// }
+
+// export default PreviousTiles
 
 // {previousTiles.length > 0 &&
 //   previousTiles.map((tile, index) => (

@@ -1,5 +1,4 @@
 import styled from 'styled-components/macro'
-import blackboard from '../../assets/images/blackboard.jpeg'
 
 export const PointDataContainer = styled.div`
   display: flex;

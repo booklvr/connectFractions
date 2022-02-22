@@ -1,12 +1,9 @@
 import React, { useReducer, createContext, useState, useMemo } from 'react'
-import uuid from 'react-uuid'
 import CurrentTile from '../../Components/CurrentTile'
 import Message from '../../Components/Message'
-import PreviousTiles from '../../Components/PreviousTiles'
 import Row from '../../Components/Row'
 import Tiles from '../../Components/Tiles'
 import TopRow from '../../Components/TopRow'
-import UndoButton from '../../Components/UndoButton'
 import PointData from '../../Components/PointData'
 // import { WinningArrays } from '../../PointData/style'
 import { gameReducer, initialGameState } from '../../reducers/gameReducer'
@@ -27,15 +24,12 @@ import {
 import {
   BoardAndTilesContainer,
   BoardContainer,
-  ButtonsContainer,
   GameTitleAndButtonsContainer,
   MatrixContainer,
-  NewGameButton,
   PageContainer,
   PointsAndTilesContainer,
   Title,
 } from './styled'
-import GameButtons from '../../Components/GameButtons'
 import Sidebar from '../../Components/Sidebar'
 
 // context

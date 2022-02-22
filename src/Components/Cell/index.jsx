@@ -1,5 +1,4 @@
 import React, { useContext, Fragment } from 'react'
-import { CSSTransition } from 'react-transition-group'
 
 import { HoverContext } from '../../Pages/ConnectFractions'
 import { CellCircle, CellContainer } from './styled'

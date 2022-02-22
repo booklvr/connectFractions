@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Fraction, Sum, WinningArrayContainer, WinningTile } from './style'
-import { FaPlus, FaEquals, FaZhihu } from 'react-icons/fa'
+import { FaPlus, FaEquals } from 'react-icons/fa'
 
 const WinningArray = ({ arr: { arr, sum } }) => {
   // useEffect(() => {
