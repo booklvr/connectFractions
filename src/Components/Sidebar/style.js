@@ -46,7 +46,7 @@ export const SidebarContainer = styled.div`
 
   top: 0;
   bottom: 0;
-  right: ${({ showSidebar }) => (showSidebar ? '-8.5rem' : '0')};
+  right: ${({ showSidebar }) => (showSidebar ? '0' : '-8.5rem')};
 `
 
 export const SidebarRow = styled.div`

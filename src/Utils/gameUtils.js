@@ -135,9 +135,7 @@ export const createBoard = () => {
   return initialArray
 }
 
-
-
-const getVerticalArray = ({ r, c }, board) => {
+const getVerticalArray = (r, c, board) => {
   const verticalArray = []
   for (var i = r; i < 6; i++) {
     verticalArray.push(board[i][c])
@@ -148,6 +146,9 @@ const getVerticalArray = ({ r, c }, board) => {
 const checkVertical = (r, c, board) => {
   // get vertical array
   const verticalArray = getVerticalArray(r, c, board)
+
+  console.log('checkVertical')
+  console.log('verticalArray', verticalArray)
 
   const winners = findWinnersVertical(verticalArray)
   return winners
@@ -208,6 +209,7 @@ const checkDiagonalDown = (r, c, board) => {
 
 export const getWinningArrays = (r, c, board) => {
   const vertical = checkVertical(r, c, board)
+  console.log('vertical? ==> ', vertical)
   const horizontal = checkHorizontal(r, c, board)
   const diagonalUp = checkDiagonalUp(r, c, board)
   const diagonalDown = checkDiagonalDown(r, c, board)

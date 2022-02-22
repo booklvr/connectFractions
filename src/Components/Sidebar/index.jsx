@@ -110,15 +110,15 @@ const Sidebar = () => {
     <SidebarContainer showSidebar={showSidebar}>
       <SidebarRow>
         {(showSidebar && (
-          <RightArrow
+          <LeftArrow
             onClick={() => {
-              setShowSidebar(false)
+              setShowSidebar(!showSidebar)
             }}
           />
         )) || (
-          <LeftArrow
+          <RightArrow
             onClick={() => {
-              setShowSidebar(true)
+              setShowSidebar(!showSidebar)
             }}
           />
         )}
