@@ -7,11 +7,13 @@ export const MessageContainer = styled.div`
 `
 
 export const MessageText = styled.p`
-  font-size: 2rem;
+  font-size: 1.5rem;
+  font-family: 'Kbreindeergames';
+  border-bottom: 7.5px solid
+    ${({ color }) => (color === 'red' ? 'red' : 'yellow')};
 `
 
 export const MessageTextSpan = styled.span`
   color: ${({ gameStage }) =>
     gameStage === 1 || gameStage === 2 ? 'red' : 'yellow'};
 `
-

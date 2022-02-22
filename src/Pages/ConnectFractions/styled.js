@@ -1,4 +1,6 @@
 import styled from 'styled-components/macro'
+import blackboard from '../../assets/images/blackboard.jpeg'
+import wood from '../../assets/images/wood.jpeg'
 
 export const PageContainer = styled.div`
   height: 100vh;
@@ -39,18 +41,6 @@ export const MatrixContainer = styled.div`
   border-radius: 10px;
 `
 
-export const NewGameButton = styled.button`
-  cursor: pointer;
-  width: 10rem;
-  height: 2rem;
-
-  transition: all 0.1s ease;
-
-  &:hover {
-    transform: scale(1.1);
-  }
-`
-
 export const PreviousTilesContainer = styled.div`
   display: flex;
   flex-direction: row;
@@ -63,20 +53,19 @@ export const PointsAndTilesContainer = styled.div`
   flex-direction: column;
   align-items: flex-end;
   justify-content: center;
+  background-image: url(${blackboard});
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 330px;
+  border-radius: 5px;
+  border-image-source: url(${wood});
+  border-image-width: 10px;
 `
 
 export const Title = styled.h1`
   width: 100%;
   text-align: center;
-`
-
-export const ButtonsContainer = styled.div`
-  margin-top: 1rem;
-
-  display: flex;
-  flex-direction: row-reverse;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  color: lightgrey;
+  font-family: 'Kbreindeergames', arial;
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
 `

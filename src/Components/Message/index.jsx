@@ -1,7 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { GameContext } from '../../Pages/ConnectFractions'
+
 import { MessageContainer, MessageText } from './style'
 
 const Message = ({ message, gameStage }) => {
+  const { gameState } = useContext(GameContext)
+
   let stage = ''
 
   switch (gameStage) {
@@ -23,7 +27,9 @@ const Message = ({ message, gameStage }) => {
 
   return (
     <MessageContainer>
-      <MessageText>{(message && message) || stage}</MessageText>
+      <MessageText color={gameState.currentPlayer === 1 ? 'red' : 'yellow'}>
+        {(message && message) || stage}
+      </MessageText>
     </MessageContainer>
   )
 }

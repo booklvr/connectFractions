@@ -9,13 +9,13 @@ const CurrentTile = () => {
 
   return (
     <CurrentTileContainer>
-      <TileText>CurrentTile:</TileText>
-      {tileValue && (
+      <TileText>Current Fraction:</TileText>
+      {(tileValue && (
         <Tile color={tileValue.color}>
           <sup>{tileValue.num}</sup>&frasl;
           <sub>{tileValue.den}</sub>
         </Tile>
-      )}
+      )) || <Tile color={'lightgrey'}>?</Tile>}
     </CurrentTileContainer>
   )
 }

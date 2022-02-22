@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { Fraction, Sum, WinningArrayContainer, WinningTile } from './style'
-import { FaPlus, FaEquals } from 'react-icons/fa'
+import { FaPlus, FaEquals, FaZhihu } from 'react-icons/fa'
 
 const WinningArray = ({ arr: { arr, sum } }) => {
   // useEffect(() => {
@@ -13,9 +13,11 @@ const WinningArray = ({ arr: { arr, sum } }) => {
       {arr.map((item, index, arr) => (
         <Fraction key={index}>
           <WinningTile key={index} color={item.color}>
-            <sup>{item.num}</sup>&frasl;<sub>{item.den}</sub>
+            <sub>{item.num}</sub>&frasl;<sub>{item.den}</sub>
           </WinningTile>
-          {arr.length - 1 !== index && <FaPlus />}
+          {arr.length - 1 !== index && (
+            <FaPlus style={{ color: 'white', fontSize: '0.75rem' }} />
+          )}
         </Fraction>
       ))}
     </WinningArrayContainer>

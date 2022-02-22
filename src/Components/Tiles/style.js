@@ -4,13 +4,12 @@ export const TilesContainer = styled.div`
   pointer-events: ${({ disabled }) => (disabled ? 'none' : 'auto')};
   display: flex;
   flex-direction: row;
+  justify-content: space-around;
   flex-wrap: wrap;
   height: calc(var(--cellWidth) * 6);
+  padding: 5px;
   /* background-color: ${({ color }) =>
     color === 'red' ? 'red' : 'yellow'}; */
-  width: 320px;
-
-  border: 10px solid ${({ color }) => (color === 'red' ? 'red' : 'yellow')};
 `
 
 export const Tile = styled.div`
@@ -24,6 +23,7 @@ export const Tile = styled.div`
   width: calc(var(--cellWidth) * 0.9);
   margin: 3px;
   border-radius: 50%;
+  box-shadow: inset 0 -1px 2px rgba(0, 0, 0, 0.8), 0 2px 5px rgba(0, 0, 0, 1);
 
   sub {
     letter-spacing: 2px;

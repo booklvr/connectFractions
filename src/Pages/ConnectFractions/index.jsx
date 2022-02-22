@@ -35,6 +35,8 @@ import {
   PointsAndTilesContainer,
   Title,
 } from './styled'
+import GameButtons from '../../Components/GameButtons'
+import Sidebar from '../../Components/Sidebar'
 
 // context
 export const GameContext = createContext()
@@ -79,11 +81,6 @@ const ConnectFractions = () => {
         position: { r, c },
       }
 
-      console.log('turn :>> ', turn)
-      console.log('winningArrays :>> ', winningArrays)
-
-      
-
       if (points) {
         if (gameState.currentPlayer === 1) {
           // copy game state red winnings
@@ -120,12 +117,6 @@ const ConnectFractions = () => {
     }
   }
 
-  const handleNewGame = () => {
-    dispatchGameState({
-      type: 'newGame',
-    })
-  }
-
   const gameContextValue = useMemo(() => {
     return { gameState, dispatchGameState }
   }, [gameState, dispatchGameState])
@@ -134,6 +125,7 @@ const ConnectFractions = () => {
     <GameContext.Provider value={gameContextValue}>
       <HoverContext.Provider value={{ hoverColumn, setHoverColumn }}>
         <PageContainer>
+          <Sidebar />
           <BoardAndTilesContainer>
             <PointsAndTilesContainer>
               <PointData data={gameState.redWinnings} />
@@ -147,21 +139,11 @@ const ConnectFractions = () => {
 
             <BoardContainer>
               <GameTitleAndButtonsContainer>
-                <Title>ConnectFractions</Title>
+                <Title>Connect Fractions</Title>
                 <Message
                   gameStage={gameState.stage}
                   message={gameState.message}
                 />
-                <ButtonsContainer>
-                  <NewGameButton
-                    onClick={() => {
-                      handleNewGame()
-                    }}
-                  >
-                    New Game
-                  </NewGameButton>
-                  {gameState.previousTurns.length > 0 && <UndoButton />}
-                </ButtonsContainer>
 
                 <CurrentTile />
               </GameTitleAndButtonsContainer>

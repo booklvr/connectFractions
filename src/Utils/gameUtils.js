@@ -135,13 +135,7 @@ export const createBoard = () => {
   return initialArray
 }
 
-// export const getCoordinate = ({ r, c }) => {
-//   console.log(`col: [${r}, ${c}]`)
-// }
 
-// export const getCoordinateValue = ({ r, c }, board) => {
-//   console.log(board[r][c])
-// }
 
 const getVerticalArray = ({ r, c }, board) => {
   const verticalArray = []

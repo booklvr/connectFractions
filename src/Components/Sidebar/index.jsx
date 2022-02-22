@@ -1,10 +1,28 @@
-import React, { useContext } from 'react'
+import React, { useState, useContext } from 'react'
 import { GameContext } from '../../Pages/ConnectFractions'
 import { deepCloneBoard } from '../../Utils/gameUtils'
-import { UndoButtonContainer } from './style'
 
-const UndoButton = () => {
+import {
+  LeftArrow,
+  PlayAgainButton,
+  RightArrow,
+  SidebarContainer,
+  SideBarHeader,
+  SidebarOptionText,
+  SidebarRow,
+  UndoButton,
+} from './style.js'
+
+const Sidebar = () => {
+  const [showSidebar, setShowSidebar] = useState(false)
+
   const { gameState, dispatchGameState } = useContext(GameContext)
+
+  const handleNewGame = () => {
+    dispatchGameState({
+      type: 'newGame',
+    })
+  }
 
   const removeTileFromBoard = ({ r, c }) => {
     let board = deepCloneBoard(gameState.board)
@@ -87,16 +105,36 @@ const UndoButton = () => {
       board: removeTileFromBoard(lastTurn.position),
       stage,
     })
-
-    // remove Previous Winning Arrrays
-
-    // replace the previousTile
-    // replaceTile(lastTurn.tile)
-    // removeTileFromBoard(lastTurn.tile)
-    // removeWinningArray(lastTurn.winningArrays, lastTurn.tile)
   }
+  return (
+    <SidebarContainer showSidebar={showSidebar}>
+      <SidebarRow>
+        {(showSidebar && (
+          <RightArrow
+            onClick={() => {
+              setShowSidebar(false)
+            }}
+          />
+        )) || (
+          <LeftArrow
+            onClick={() => {
+              setShowSidebar(true)
+            }}
+          />
+        )}
 
-  return <UndoButtonContainer onClick={handleUndo}>Undo</UndoButtonContainer>
+        <SideBarHeader>Options</SideBarHeader>
+      </SidebarRow>
+      <SidebarRow onClick={handleNewGame}>
+        <PlayAgainButton />
+        <SidebarOptionText>New Game</SidebarOptionText>
+      </SidebarRow>
+      <SidebarRow onClick={handleUndo}>
+        <UndoButton />
+        <SidebarOptionText>Undo</SidebarOptionText>
+      </SidebarRow>
+    </SidebarContainer>
+  )
 }
 
-export default UndoButton
+export default Sidebar

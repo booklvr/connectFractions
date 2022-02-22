@@ -17,20 +17,7 @@ export const TopRowCircle = styled.div`
   height: 90%;
   border-radius: 50%;
   visibility: ${({ show }) => (show ? 'auto' : 'hidden')};
-  /* background-color: ${({ currentPlayer, hoverColumn, column }) =>
-    column === hoverColumn && currentPlayer === 1
-      ? 'red'
-      : column === hoverColumn && currentPlayer === 2
-      ? 'yellow'
-      : 'none'}; */
-  background-color: black;
-  background: ${({ tileValue }) => (tileValue ? tileValue.color : 'none')};
-
-  /* &:hover {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: ${({ currentPlayer }) =>
-    currentPlayer === 1 ? 'red' : 'yellow'};
-  } */
+  background-color: ${({ tileValue }) =>
+    tileValue ? tileValue.color : 'none'};
+  box-shadow: inset 0 -1px 2px rgba(0, 0, 0, 0.8), 0 2px 2px rgba(0, 0, 0, 1);
 `

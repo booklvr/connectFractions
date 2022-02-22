@@ -1,14 +1,22 @@
 import React from 'react'
 import WinningArrays from '../WinningArrays'
-import { PointDataContainer, Points, PointsHeading } from './style'
+import {
+  PointDataContainer,
+  Points,
+  PointsHeading,
+  PointsHeadingContainer,
+} from './style'
 
 const PointData = ({ data }) => {
-  const heading = data.team === 'red' ? 'Red Team' : 'Yellow Team'
+  const heading = data.team === 'red' ? 'Red' : 'Yellow'
 
   return (
     <PointDataContainer>
-      <PointsHeading>{heading}</PointsHeading>
-      <Points>points: {data.points}</Points>
+      <PointsHeadingContainer>
+        <PointsHeading>{heading}</PointsHeading>
+        <Points>{data.points}</Points>
+      </PointsHeadingContainer>
+
       <WinningArrays winningArrays={data.winningArrays} />
     </PointDataContainer>
   )
