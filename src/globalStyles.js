@@ -13,13 +13,6 @@ export const GlobalStyle = createGlobalStyle`
     --yellow: yellow;
  }
 
- 
-
-//  @font-face {
-//      font-family: 'Eraser';
-//      src: url(${EraserWOFF}) format('woff')
-//      src: url(${EraserWOFF2}) format('woff2')
-//  }
 
 @font-face {
     font-family: 'Eraser';
