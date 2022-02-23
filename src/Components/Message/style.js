@@ -8,7 +8,7 @@ export const MessageContainer = styled.div`
 
 export const MessageText = styled.p`
   font-size: 1.5rem;
-  font-family: 'Kbreindeergames';
+  font-family: 'Gaegu';
   border-bottom: 7.5px solid
     ${({ color }) => (color === 'red' ? 'red' : 'yellow')};
 `

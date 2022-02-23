@@ -65,7 +65,7 @@ export const PointsAndTilesContainer = styled.div`
 export const Title = styled.h1`
   width: 100%;
   text-align: center;
-  font-family: 'Kbreindeergames', arial;
+  font-family: 'Gaegu', arial;
   font-size: 2.5rem;
   margin-bottom: 2rem;
 `

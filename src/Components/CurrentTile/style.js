@@ -10,7 +10,7 @@ export const CurrentTileContainer = styled.div`
 `
 export const TileText = styled.p`
   margin-bottom: 1rem;
-  font-family: 'Kbreindeergames';
+  font-family: 'Gaegu', cursive;
   font-size: 1.5rem;
 `
 

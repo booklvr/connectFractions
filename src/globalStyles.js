@@ -1,9 +1,6 @@
 // import EraserTFF from './assets/fonts/Eraser.ttf'
 import EraserWOFF from './assets/fonts/eraser-webfont.woff'
 import EraserWOFF2 from './assets/fonts/eraser-webfont.woff2'
-// import KbreindeergamesTFF from './assets/fonts/Kbreindeergames-ra2O.ttf'
-import KbreindeergamesWOFF from './assets/fonts/kbreindeergames-ra2o-webfont.woff'
-import KbreindeergamesWOFF2 from './assets/fonts/kbreindeergames-ra2o-webfont.woff2'
 
 const { createGlobalStyle } = require('styled-components')
 
@@ -16,18 +13,22 @@ export const GlobalStyle = createGlobalStyle`
     --yellow: yellow;
  }
 
- @font-face {
-     font-family: 'Eraser';
-     src: url(${EraserWOFF}) format('woff')
-     src: url(${EraserWOFF2}) format('woff2')
- }
+ 
+
+//  @font-face {
+//      font-family: 'Eraser';
+//      src: url(${EraserWOFF}) format('woff')
+//      src: url(${EraserWOFF2}) format('woff2')
+//  }
+
+@font-face {
+    font-family: 'Eraser';
+    src: local("Eraser"), url('./assets/fonts/eraser-webfont.woff) format('woff'), 
+    url('./assets/fonts/eraser-webfont.woff2)
+}
 
  
- @font-face {
-    font-family: 'Kbreindeergames';
-    src: url(${KbreindeergamesWOFF}) format('woff')
-    src: url(${KbreindeergamesWOFF2}) format('woff2')
-}
+
 
  *,*::before,*::after{
     margin:0;

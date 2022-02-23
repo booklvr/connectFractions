@@ -60,14 +60,14 @@ export const SidebarRow = styled.div`
 
 export const SideBarHeader = styled.h2`
   color: white;
-  font-family: 'Kbreindeergames', arial;
+  font-family: 'Gaegu', arial;
   font-size: 1.5rem;
   border-bottom: 4px solid white;
 `
 
 export const SidebarOptionText = styled.h3`
   color: ${({ active }) => (active !== 0 ? 'white' : 'grey')};
-  font-family: 'Kbreindeergames', arial;
+  font-family: 'Gaegu', arial;
   font-size: 1.2rem;
   cursor: pointer;
   /* color: white; */
@@ -80,14 +80,14 @@ export const SidebarOptionText = styled.h3`
 
 export const GameModeHeader = styled.h3`
   color: white;
-  font-family: 'Kbreindeergames', arial;
+  font-family: 'Gaegu', arial;
   font-size: 1.5rem;
   border-bottom: 4px solid white;
 `
 
 export const ModeButtonStyle = css`
   color: white;
-  font-family: 'Kbreindeergames', arial;
+  font-family: 'Gaegu', arial;
   font-size: 1.2rem;
   padding: 0.2rem;
   margin: 0.8rem;
