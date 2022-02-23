@@ -66,7 +66,7 @@ const Tiles = ({ color, tiles, disabled, gameStage }) => {
           tileValue: tile,
         })
         dispatchGameState({
-          type: 'increment',
+          type: 'incrementStage',
         })
         hideTile(tile)
         break

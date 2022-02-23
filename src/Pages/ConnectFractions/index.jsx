@@ -7,20 +7,7 @@ import TopRow from '../../Components/TopRow'
 import PointData from '../../Components/PointData'
 // import { WinningArrays } from '../../PointData/style'
 import { gameReducer, initialGameState } from '../../reducers/gameReducer'
-import {
-  // createBoard,
-  // combineWinningArrays,
-  deepCloneBoard,
-  // generateNewBoard,
-  // getCoordinate,
-  // getCoordinateValue,
-  // getDiagonalDownArray,
-  // getDiagonalUpArray,
-  // getHorizontalArray,
-  // getVertical,
-  getWinningArrays,
-  // showWinningTilesOnBoard,
-} from '../../Utils/gameUtils'
+import { deepCloneBoard, getWinningArrays } from '../../Utils/gameUtils'
 import {
   BoardAndTilesContainer,
   BoardContainer,

@@ -102,8 +102,7 @@ export const gameReducer = (state, action) => {
         yellowTiles: action.yellowTiles,
         message: action.message,
       }
-    // go to the next stage of the
-    case 'increment':
+    case 'incrementStage':
       return {
         ...state,
         stage: state.stage === 4 ? 1 : state.stage + 1,
@@ -113,6 +112,8 @@ export const gameReducer = (state, action) => {
         ...state,
         previousTurns: action.previousTurns,
         tileValue: null,
+        redWinnings: action.redWinnings,
+        yellowWinnings: action.yellowWinnings,
         stage: action.stage,
         currentPlayer: state.currentPlayer === 1 ? 2 : 1,
         board: action.board,
@@ -127,7 +128,6 @@ export const gameReducer = (state, action) => {
         ...state,
         yellowWinnings: action.yellowWinnings,
       }
-
     case 'endTurn':
       return {
         ...state,
@@ -137,9 +137,6 @@ export const gameReducer = (state, action) => {
         board: action.board,
         currentPlayer: state.currentPlayer === 1 ? 2 : 1,
       }
-    // case 10
-
-    //7
     default:
       throw Error(`Action "${action.type}" is not a valid action.`)
   }

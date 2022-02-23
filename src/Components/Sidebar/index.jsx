@@ -1,7 +1,6 @@
 import React, { useState, useContext } from 'react'
 import { GameContext } from '../../Pages/ConnectFractions'
 import {
-  deepCloneBoard,
   removeTileFromBoard,
   removeWinningArrays,
   replaceTile,
@@ -35,24 +34,10 @@ const Sidebar = () => {
     }
   }
 
-  // const removeTileFromBoard = ({ r, c }, prevBoard) => {
-  //   const board = deepCloneBoard(gameState.board)
-  //   board[r][c] = {
-  //     val: null,
-  //     num: null,
-  //     den: null,
-  //     hidden: false,
-  //     color: null,
-  //     coordinate: { r, c },
-  //   }
-  //   return board
-  // }
-
   const handleUndo = () => {
     // copy the array
     let previousTurns = [...gameState.previousTurns]
 
-    
     if (previousTurns.length === 0) return
 
     // get the last tile and remove it from the previous array
@@ -74,6 +59,8 @@ const Sidebar = () => {
       gameState.yellowWinnings,
       lastTurn
     )
+
+    console.log('redWinnings :>> ', redWinnings)
 
     // remove the tile from the board
     const board = removeTileFromBoard(lastTurn.position, gameState.board)

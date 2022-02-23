@@ -425,7 +425,11 @@ export const removeWinningArrays = (prevRedWins, prevYellowWins, lastTurn) => {
 
   if (lastTurn.points) {
     if (lastTurn.tile.color === 'red') {
+      console.log('redWinning.points', redWinnings.points)
       redWinnings.points -= lastTurn.points
+      console.log('redWinning.points', redWinnings.points)
+      console.log('redWinnings', redWinnings)
+
       redWinnings.winningArrays.splice(0, lastTurn.numberOfWins)
     } else {
       yellowWinnings.points -= lastTurn.points
