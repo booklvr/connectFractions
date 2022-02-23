@@ -2,13 +2,10 @@ import { createBoard, createTiles, createEasyTiles } from '../Utils/gameUtils'
 
 export const initialGameState = {
   stage: 1,
-  player1: 1,
-  player2: 2,
   currentPlayer: 1,
   board: createBoard(),
   redTiles: createEasyTiles('red'),
   yellowTiles: createEasyTiles('yellow'),
-  // winningArrays: [],
   redWinnings: {
     team: 'red',
     points: 0,
@@ -19,8 +16,6 @@ export const initialGameState = {
     points: 0,
     winningArrays: [],
   },
-  // gameOver: false,
-  message: 'Red: Choose a fraction.',
   tileValue: null,
   previousTurns: [],
   mode: 'easy',
