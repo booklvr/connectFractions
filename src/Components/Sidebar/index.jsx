@@ -1,6 +1,12 @@
 import React, { useState, useContext } from 'react'
 import { GameContext } from '../../Pages/ConnectFractions'
-import { deepCloneBoard } from '../../Utils/gameUtils'
+import {
+  deepCloneBoard,
+  removeTileFromBoard,
+  removeWinningArrays,
+  replaceTile,
+  undoStage,
+} from '../../Utils/gameUtils'
 
 import {
   EasyModeButton,
@@ -29,80 +35,48 @@ const Sidebar = () => {
     }
   }
 
-  const removeTileFromBoard = ({ r, c }) => {
-    let board = deepCloneBoard(gameState.board)
-    board[r][c] = {
-      val: null,
-      num: null,
-      den: null,
-      hidden: false,
-      color: null,
-      coordinate: { r, c },
-    }
-    return board
-  }
-
-  const removeWinningArrays = (lastTurn) => {
-    // if there were winning arrays
-    const redWinnings = gameState.redWinnings
-    const yellowWinnings = gameState.yellowWinnings
-
-    if (lastTurn.points) {
-      if (lastTurn.tile.color === 'red') {
-        redWinnings.points -= lastTurn.points
-        redWinnings.winningArrays.splice(0, lastTurn.numberOfWins)
-      } else {
-        yellowWinnings.points -= lastTurn.points
-        yellowWinnings.winningArrays.splice(0, lastTurn.numberOfWins)
-      }
-    }
-
-    return { redWinnings, yellowWinnings }
-  }
-
-  const replaceTile = (lastTile) => {
-    const yellowTiles = gameState.yellowTiles
-    const redTiles = gameState.redTiles
-
-    if (lastTile.color === 'red') {
-      // red tile
-
-      let index = redTiles.findIndex((tile) => tile.id === lastTile.id)
-      redTiles[index].hidden = false
-
-      // redTiles[index].hidden = false
-    } else {
-      // yellow tile
-
-      let index = yellowTiles.findIndex((tile) => tile.id === lastTile.id)
-
-      yellowTiles[index].hidden = false
-    }
-    return { redTiles, yellowTiles }
-  }
+  // const removeTileFromBoard = ({ r, c }, prevBoard) => {
+  //   const board = deepCloneBoard(gameState.board)
+  //   board[r][c] = {
+  //     val: null,
+  //     num: null,
+  //     den: null,
+  //     hidden: false,
+  //     color: null,
+  //     coordinate: { r, c },
+  //   }
+  //   return board
+  // }
 
   const handleUndo = () => {
     // copy the array
     let previousTurns = [...gameState.previousTurns]
 
+    
     if (previousTurns.length === 0) return
 
     // get the last tile and remove it from the previous array
     const lastTurn = previousTurns.shift()
 
     // revert to previous game Stage 1 or 3
-    let stage = gameState.stage
+    let stage = undoStage(gameState.stage)
 
-    if (stage === 3 || stage === 4) {
-      stage = 1
-    } else {
-      stage = 3
-    }
+    // replace the tile to it's colors remaining available tiles
+    const { redTiles, yellowTiles } = replaceTile(
+      gameState.redTiles,
+      gameState.yellowTiles,
+      lastTurn.tile
+    )
 
-    const { redTiles, yellowTiles } = replaceTile(lastTurn.tile)
-    const { redWinnings, yellowWinnings } = removeWinningArrays(lastTurn)
+    // if the previous turn resulted in winning arrays, remove the points and winnings arrays from that team
+    const { redWinnings, yellowWinnings } = removeWinningArrays(
+      gameState.redWinnings,
+      gameState.yellowWinnings,
+      lastTurn
+    )
 
-    const board = removeTileFromBoard(lastTurn.position)
+    // remove the tile from the board
+    const board = removeTileFromBoard(lastTurn.position, gameState.board)
 
     dispatchGameState({
       type: 'undoPreviousMove',

@@ -417,3 +417,57 @@ const combineWinningArrays = (
     winningArrays,
   }
 }
+
+export const removeWinningArrays = (prevRedWins, prevYellowWins, lastTurn) => {
+  // if there were winning arrays
+  const redWinnings = { ...prevRedWins }
+  const yellowWinnings = { ...prevYellowWins }
+
+  if (lastTurn.points) {
+    if (lastTurn.tile.color === 'red') {
+      redWinnings.points -= lastTurn.points
+      redWinnings.winningArrays.splice(0, lastTurn.numberOfWins)
+    } else {
+      yellowWinnings.points -= lastTurn.points
+      yellowWinnings.winningArrays.splice(0, lastTurn.numberOfWins)
+    }
+  }
+
+  return { redWinnings, yellowWinnings }
+}
+
+export const replaceTile = (prevRedTiles, prevYellowTiles, lastTile) => {
+  const yellowTiles = [...prevYellowTiles]
+  const redTiles = [...prevRedTiles]
+
+  if (lastTile.color === 'red') {
+    // red tile
+
+    let index = redTiles.findIndex((tile) => tile.id === lastTile.id)
+    redTiles[index].hidden = false
+  } else {
+    // yellow tile
+
+    let index = yellowTiles.findIndex((tile) => tile.id === lastTile.id)
+
+    yellowTiles[index].hidden = false
+  }
+  return { redTiles, yellowTiles }
+}
+
+export const removeTileFromBoard = ({ r, c }, prevBoard) => {
+  const board = deepCloneBoard(prevBoard)
+  board[r][c] = {
+    val: null,
+    num: null,
+    den: null,
+    hidden: false,
+    color: null,
+    coordinate: { r, c },
+  }
+  return board
+}
+
+export const undoStage = (stage) => {
+  return stage === 3 || stage === 4 ? 1 : 3
+}
