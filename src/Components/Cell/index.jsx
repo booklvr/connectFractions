@@ -23,7 +23,7 @@ const Cell = ({ cell, columnIndex, play }) => {
   if (cell.val) {
     innerCircle = (
       <Fragment>
-        <sub>{cell.num}</sub>&frasl;
+        <sub>{cell.num}</sub>
         <sub>{cell.den}</sub>
       </Fragment>
     )

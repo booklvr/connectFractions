@@ -96,7 +96,8 @@ const Tiles = ({ color, tiles, disabled, gameStage }) => {
           gameStage={gameStage}
           disabled={disabled}
         >
-          <sup>{tile.num}</sup>&frasl;<sub>{tile.den}</sub>
+          <sub>{tile.num}</sub>
+          <sub>{tile.den}</sub>
         </Tile>
       ))}
     </TilesContainer>
