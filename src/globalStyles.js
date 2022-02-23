@@ -18,7 +18,6 @@ export const GlobalStyle = createGlobalStyle`
 
  @font-face {
      font-family: 'Eraser';
-     src: url(${EraserTFF}) format('ttf')
      src: url(${EraserWOFF}) format('woff')
      src: url(${EraserWOFF2}) format('woff2')
  }
@@ -26,8 +25,6 @@ export const GlobalStyle = createGlobalStyle`
  
  @font-face {
     font-family: 'Kbreindeergames';
-    src: url({})
-    src: url(${KbreindeergamesTFF}) format('ttf')
     src: url(${KbreindeergamesWOFF}) format('woff')
     src: url(${KbreindeergamesWOFF2}) format('woff2')
 }
