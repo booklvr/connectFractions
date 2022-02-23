@@ -1,70 +1,98 @@
-# Getting Started with Create React App
+<h1 align="center">Welcome to connect-fractions 👋</h1>
+<p>
+  <img alt="Version" src="https://img.shields.io/badge/version-0.1.0-blue.svg?cacheSeconds=2592000" />
+  <a href="https://github.com/booklvr/connectFractions#readme" target="_blank">
+    <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg" />
+  </a>
+  <a href="https://github.com/booklvr/connectFractions/graphs/commit-activity" target="_blank">
+    <img alt="Maintenance" src="https://img.shields.io/badge/Maintained%3F-yes-green.svg" />
+  </a>
+</p>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+> Single page game to practice fractions. The game is a variation on the classic connect four game.
 
-## Available Scripts
+<h2>Objective:</h2>
+<p>Create whole numbers from fractions to win points.</p>
 
-In the project directory, you can run:
+<h2>How To Play:</h2>
+<ol>
+  <li>Red goes first.</li>
+  <li>Choose a tile.</li>
+  <li>Drop the tile down a column to create a whole number from the different fractions.</li>
+</ol>
 
-### `npm start`
+<h2>Rules</h2>
+<ol>
+  <li>
+    You must use at least three fractions to get a point.
+  </li>
+  <li>
+    <p>You may create whole numbers from fractions in any continuous direction:</p> 
+    <ul>
+      <li>vertically</li>
+      <li>horizontally</li>
+      <li>diagonally up</li>
+      <li>diagonally down</li>
+    </ul>
+  </li>
+  <li>Winning Fractions must include the dropped tile.</li>
+  <li>You can create multiple fractions in the same direction or in in multiple directions.</li>
+  <li>
+    <p>You are awarded points for the whole number you create.  For Example:</p>
+    <ul>
+      <li>1/4 + 1/4 + 1/2 = 1  =>  is awarded one point</li>
+      <li>1/2 + 3/4 + 3/4 = 2  =>  is awarded two points</li>
+    </ul>
+  </li>
+  <li>
+    <p>You may combine fractions that create whole numbers for extra points.</p>
+    <ul>
+      <li>1/2 + 3/4 + 3/4 + 1/6 + 2/6 + 3/6 = 4 points
+        <ul>
+          <li>1/2 + 3/4 + 3/4 + 1/6 + 2/6 + 3/6 = 3</li>
+          <li>1/6 + 2/6 + 3/6 = 1</li>
+          <li>*** if the dropped tile was 3/6</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>The game ends when all tiles are gone or when a pre-determined amount of points are won.</li>
+</ol>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### 🏠 [Homepage](https://connect-fractions.netlify.app/)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### ✨ [Demo](https://connect-fractions.netlify.app/)
 
-### `npm test`
+## Install
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```sh
+yarn install
+```
 
-### `npm run build`
+## Usage
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```sh
+yarn run start
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Run tests
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```sh
+yarn run test
+```
 
-### `npm run eject`
+## Author
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+👤 **Nick de Waal**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- Website: nickdewaal.ca
+- Github: [@booklvr](https://github.com/booklvr)
+- LinkedIn: [@https:\/\/github.com\/booklvr\/connectFractions](https://linkedin.com/in/https://github.com/booklvr/connectFractions)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Show your support
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Give a ⭐️ if this project helped you!
 
-## Learn More
+---
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+_This README was generated with ❤️ by [readme-md-generator](https://github.com/kefranabg/readme-md-generator)_
