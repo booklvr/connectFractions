@@ -6,8 +6,8 @@ export const initialGameState = {
   player2: 2,
   currentPlayer: 1,
   board: createBoard(),
-  redTiles: createTiles('red'),
-  yellowTiles: createTiles('yellow'),
+  redTiles: createEasyTiles('red'),
+  yellowTiles: createEasyTiles('yellow'),
   // winningArrays: [],
   redWinnings: {
     team: 'red',
