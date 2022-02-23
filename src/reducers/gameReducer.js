@@ -32,9 +32,9 @@ export const gameReducer = (state, action) => {
       return {
         ...initialGameState,
         redTiles:
-          state.mode === 'easy' ? createTiles('red') : createEasyTiles('red'),
+          state.mode === 'hard' ? createTiles('red') : createEasyTiles('red'),
         yellowTiles:
-          state.mode === 'easy'
+          state.mode === 'hard'
             ? createTiles('yellow')
             : createEasyTiles('yellow'),
         redWinnings: {

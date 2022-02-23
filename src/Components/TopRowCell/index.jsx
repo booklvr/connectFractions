@@ -10,14 +10,6 @@ const TopRowCell = ({ column, play }) => {
     gameState: { currentPlayer, tileValue },
   } = useContext(GameContext)
 
-  // const [show, setShow] = useState(false)
-
-  // useEffect(() => {
-  //   if (hoverColumn === column) {
-  //     setShow(true)
-  //   } else setShow(false)
-  // }, [hoverColumn, column])
-
   return (
     <TopRowCellContainer
       onMouseEnter={() => {

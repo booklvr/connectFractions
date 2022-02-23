@@ -19,81 +19,6 @@ export const generateNewBoard = () => [
   [null, null, null, null, null, null, null],
 ]
 
-// // for real tho...all credit for this super optimized logic belongs here: Jeff Leu circa November 23, 2016
-// const checkVertical = (board, pos) => {
-//   // Check only if row is 3 or greater
-//   // let total = 0
-
-//   for (let r = 2; r < 6; r++) {
-//     for (let c = 0; c < 7; c++) {
-//       if (board[r][c]) {
-//         if (
-//           board[r][c] === board[r - 1][c] &&
-//           board[r][c] === board[r - 2][c] &&
-//           board[r][c] === board[r - 3][c]
-//         ) {
-//           return board[r][c]
-//         }
-//       }
-//     }
-//   }
-// }
-
-// const checkDiagonalRight = (board, pos) => {
-//   // Check only if row is 3 or greater AND column is 3 or less
-//   for (let r = 3; r < 6; r++) {
-//     for (let c = 0; c < 4; c++) {
-//       if (board[r][c]) {
-//         if (
-//           board[r][c] === board[r - 1][c + 1] &&
-//           board[r][c] === board[r - 2][c + 2] &&
-//           board[r][c] === board[r - 3][c + 3]
-//         ) {
-//           return board[r][c]
-//         }
-//       }
-//     }
-//   }
-// }
-
-// const checkDiagonalLeft = (board, pos) => {
-//   // Check only if row is 3 or greater AND column is 3 or greater
-//   for (let r = 3; r < 6; r++) {
-//     for (let c = 3; c < 7; c++) {
-//       if (board[r][c]) {
-//         if (
-//           board[r][c] === board[r - 1][c - 1] &&
-//           board[r][c] === board[r - 2][c - 2] &&
-//           board[r][c] === board[r - 3][c - 3]
-//         ) {
-//           return board[r][c]
-//         }
-//       }
-//     }
-//   }
-// }
-
-// const checkDraw = (board) => {
-//   for (let r = 0; r < 6; r++) {
-//     for (let c = 0; c < 7; c++) {
-//       if (board[r][c] === null) {
-//         return null
-//       }
-//     }
-//   }
-//   return 'draw'
-// }
-
-// export const checkForWin = (board, pos) => {
-//   return (
-//     checkVertical(board, pos) ||
-//     checkDiagonalRight(board, pos) ||
-//     checkDiagonalLeft(board, pos) ||
-//     // checkHorizontal(board, pos) ||
-//     checkDraw(board, pos)
-//   )
-// }
-
 function EasyObject(num, den, color) {
   this.val = num / den
   this.num = num
@@ -157,7 +82,7 @@ export const createBoard = () => {
         num: null,
         den: null,
         hidden: false,
-        color: null,
+        // color: null,
         id: null,
         coordinate: {
           r,
@@ -218,7 +143,7 @@ export const getHorizontalArray = (r, c, board) => {
 const checkHorizontal = (r, c, board) => {
   //get horizontal array
   const array = getHorizontalArray(r, c, board)
-  const winners = findWinners(array, board, c)
+  const winners = findWinners(array, c)
 
   return winners
 }
@@ -226,7 +151,7 @@ const checkHorizontal = (r, c, board) => {
 const checkDiagonalUp = (r, c, board) => {
   //get horizontal array
   const array = getDiagonalUpArray(r, c, board)
-  const winners = findWinners(array, board, c)
+  const winners = findWinners(array, c)
 
   return winners
 }
@@ -234,7 +159,7 @@ const checkDiagonalUp = (r, c, board) => {
 const checkDiagonalDown = (r, c, board) => {
   //get horizontal array
   const array = getDiagonalDownArray(r, c, board)
-  const winners = findWinners(array, board, c)
+  const winners = findWinners(array, c)
 
   return winners
 }
@@ -385,7 +310,8 @@ const arrayIncludesCoordinate = (arr, c) => {
 }
 
 // this should return the winning horizontal array if there is one
-const findWinners = (arr, board, c) => {
+const findWinners = (arr, c) => {
+  // winning array must include at least three
   if (arr.length < 3) {
     return null
   }
@@ -393,11 +319,14 @@ const findWinners = (arr, board, c) => {
   const length = arr.length
 
   let l = length
+  // n is the number of cells in the array to check for a winning combination
   let n = 0
 
   let winningArrays = []
 
+  // continue to iterate over sections until arriving at arrays of three
   while (l - 2 > 0) {
+    // iterate over a section of the array to check according to n
     for (let i = 0; i < length - (length - n) + 1; i++) {
       // use slice to get the next portion of the array to check
       let slicedArray = [...arr].splice(i, length - n)
@@ -411,6 +340,7 @@ const findWinners = (arr, board, c) => {
       // see if there is a whole number in the slices array
       let result = checkFractionsEqualWholeNumber(slicedArray)
 
+      // if a whole number is found add it to the winningArrays.
       if (result) {
         winningArrays.push({
           points: result,
@@ -418,6 +348,8 @@ const findWinners = (arr, board, c) => {
         })
       }
     }
+    // reduce the size of the array to check
+    // // reduce the size of the sliced array to check
     l--
     n++
   }
@@ -426,7 +358,6 @@ const findWinners = (arr, board, c) => {
   }
 }
 
-// refactor??
 // change vertical to array of arrays but with only a single array
 // loop through all props and apply same logic
 const combineWinningArrays = (
