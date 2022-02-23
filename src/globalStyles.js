@@ -1,7 +1,7 @@
-import EraserTFF from './assets/fonts/Eraser.ttf'
+// import EraserTFF from './assets/fonts/Eraser.ttf'
 import EraserWOFF from './assets/fonts/eraser-webfont.woff'
 import EraserWOFF2 from './assets/fonts/eraser-webfont.woff2'
-import KbreindeergamesTFF from './assets/fonts/Kbreindeergames-ra2O.ttf'
+// import KbreindeergamesTFF from './assets/fonts/Kbreindeergames-ra2O.ttf'
 import KbreindeergamesWOFF from './assets/fonts/kbreindeergames-ra2o-webfont.woff'
 import KbreindeergamesWOFF2 from './assets/fonts/kbreindeergames-ra2o-webfont.woff2'
 
