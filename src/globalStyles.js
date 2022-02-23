@@ -1,6 +1,6 @@
 // import EraserTFF from './assets/fonts/Eraser.ttf'
-import EraserWOFF from './assets/fonts/eraser-webfont.woff'
-import EraserWOFF2 from './assets/fonts/eraser-webfont.woff2'
+// import EraserWOFF from './assets/fonts/eraser-webfont.woff'
+// import EraserWOFF2 from './assets/fonts/eraser-webfont.woff2'
 
 const { createGlobalStyle } = require('styled-components')
 
