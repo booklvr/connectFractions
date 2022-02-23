@@ -1,6 +1,5 @@
 import styled from 'styled-components/macro'
 import blackboard from '../../assets/images/blackboard.jpeg'
-import wood from '../../assets/images/wood.jpeg'
 
 export const PageContainer = styled.div`
   height: 100vh;
@@ -57,9 +56,7 @@ export const PointsAndTilesContainer = styled.div`
   background-repeat: no-repeat;
   background-size: cover;
   width: 330px;
-  border-radius: 5px;
-  border-image-source: url(${wood});
-  border-image-width: 10px;
+  border-radius: 10px;
 `
 
 export const Title = styled.h1`

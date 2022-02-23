@@ -13,7 +13,8 @@ const WinningArray = ({ arr: { arr, sum } }) => {
       {arr.map((item, index, arr) => (
         <Fraction key={index}>
           <WinningTile key={index} color={item.color}>
-            <sub>{item.num}</sub>&frasl;<sub>{item.den}</sub>
+            <sub>{item.num}</sub>
+            <sub>{item.den}</sub>
           </WinningTile>
           {arr.length - 1 !== index && (
             <FaPlus style={{ color: 'white', fontSize: '0.75rem' }} />

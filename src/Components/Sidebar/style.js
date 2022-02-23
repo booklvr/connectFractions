@@ -10,10 +10,10 @@ import {
 const buttonStyles = css`
   color: white;
   font-size: 1.5rem;
-  cursor: pointer;
+  cursor: ${({ active }) => (active !== 0 ? 'pointer' : 'scale(1)')};
 
   &:hover {
-    transform: scale(1.2);
+    transform: ${({ active }) => (active !== 0 ? 'scale(1.2)' : 'auto')};
   }
 `
 

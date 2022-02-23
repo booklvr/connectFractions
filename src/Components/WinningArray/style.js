@@ -15,17 +15,23 @@ export const WinningArrayContainer = styled.div`
 export const WinningTile = styled.div`
   background-color: ${({ color }) => (color === 'red' ? 'red' : 'yellow')};
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 1.5rem;
-  width: 1.5rem;
-  margin: 1px;
+  height: 1.6rem;
+  width: 1.6rem;
+  /* margin: 1px; */
   border-radius: 50%;
   font-family: 'Eraser', cursive;
 
   sub {
-    letter-spacing: 2px;
-    font-size: 12px;
+    /* letter-spacing: 2px; */
+    font-size: 11px;
+    line-height: 11px;
+
+    &:last-of-type {
+      border-top: 1px solid #000;
+    }
   }
 `
 

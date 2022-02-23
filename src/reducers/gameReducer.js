@@ -102,7 +102,7 @@ export const gameReducer = (state, action) => {
         yellowTiles: action.yellowTiles,
         message: action.message,
       }
-
+    // go to the next stage of the
     case 'increment':
       return {
         ...state,
@@ -132,7 +132,7 @@ export const gameReducer = (state, action) => {
       return {
         ...state,
         previousTurns: [action.turn, ...state.previousTurns],
-        stage: state.stage === 4 ? 1 : state.stage + 1,
+        stage: state.stage === 4 ? 1 : 3,
         tileValue: null,
         board: action.board,
         currentPlayer: state.currentPlayer === 1 ? 2 : 1,

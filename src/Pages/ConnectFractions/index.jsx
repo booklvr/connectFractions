@@ -67,14 +67,7 @@ const ConnectFractions = () => {
       // check for winning arrays
       let { points, winningArrays } = getWinningArrays(r, c, board)
 
-      const turn = {
-        points,
-        numberOfWins: winningArrays.length,
-        player: gameState.currentPlayer,
-        tile: gameState.tileValue,
-        position: { r, c },
-      }
-
+      // if there are points then update the board
       if (points) {
         if (gameState.currentPlayer === 1) {
           // copy game state red winnings
@@ -101,6 +94,15 @@ const ConnectFractions = () => {
             yellowWinnings,
           })
         }
+      }
+
+      // save the current state of the this turn and place into previous turns in order to facilitate undo
+      const turn = {
+        points,
+        numberOfWins: winningArrays.length,
+        player: gameState.currentPlayer,
+        tile: gameState.tileValue,
+        position: { r, c },
       }
 
       dispatchGameState({

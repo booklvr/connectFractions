@@ -102,6 +102,8 @@ const Sidebar = () => {
     const { redTiles, yellowTiles } = replaceTile(lastTurn.tile)
     const { redWinnings, yellowWinnings } = removeWinningArrays(lastTurn)
 
+    const board = removeTileFromBoard(lastTurn.position)
+
     dispatchGameState({
       type: 'undoPreviousMove',
       previousTurns,
@@ -109,7 +111,7 @@ const Sidebar = () => {
       redTiles,
       redWinnings,
       yellowWinnings,
-      board: removeTileFromBoard(lastTurn.position),
+      board,
       stage,
     })
   }
